@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import type { OnboardingStep, Bookmark } from '@/types';
 
 export function useOnboardingState() {
-  const [step, setStep] = useState<OnboardingStep>('welcome');
+  const [step, setStep] = useState<OnboardingStep>('dashboard');
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {

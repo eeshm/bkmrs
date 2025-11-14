@@ -33,38 +33,29 @@ export function DashboardEmptyState({ bookmarks, onAddBookmark, onImportLater }:
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-white dark:bg-black">
       {/* Header */}
-      <header className="border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <header className='mx-auto px-4 py-4 flex items-center justify-between'>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <Bookmark className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              Floatmark
+            <h1 className="text-xl font-bold text-black dark:text-white">
+              Stash
             </h1>
           </div>
           <Button variant="ghost" size="icon">
             <Settings className="w-5 h-5" />
           </Button>
-        </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-16">
+      <main className="mx-auto px-4 py-16">
         {bookmarks.length === 0 ? (
           <div className="text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Empty State Illustration */}
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-linear-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-950">
-              <Bookmark className="w-12 h-12 text-blue-600 dark:text-blue-400" />
-            </div>
-
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-3xl font-bold text-black
+               dark:text-white">
                 No bookmarks yet
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-md mx-auto">
                 Start building your collection by adding your first bookmark
               </p>
             </div>
@@ -139,7 +130,7 @@ export function DashboardEmptyState({ bookmarks, onAddBookmark, onImportLater }:
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 Your Bookmarks
               </h2>
-              <Button onClick={() => setShowAddForm(true)}>
+              <Button className=" border" onClick={() => setShowAddForm(true)}>
                 <Plus className="w-4 h-4 mr-2" />
                 Add Bookmark
               </Button>

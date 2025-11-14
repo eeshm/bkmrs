@@ -1,6 +1,6 @@
 import React from 'react';
 import { useOnboardingState } from '@/hooks/useOnboardingState';
-import { WelcomeScreen } from '@/components/WelcomeScreen';
+// import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { ImportPrompt } from '@/components/ImportPrompt';
 import { DashboardEmptyState } from '@/components/DashboardEmptyState';
 import {type  Bookmark } from '@/types';
@@ -35,12 +35,12 @@ export default function App() {
 
   return (
     <>
-      {step === 'welcome' && (
+      {/* {step === 'welcome' && (
         <WelcomeScreen
           onImport={handleImport}
           onStartFresh={handleStartFresh}
         />
-      )}
+      )} */}
       
       {step === 'import' && (
         <ImportPrompt
