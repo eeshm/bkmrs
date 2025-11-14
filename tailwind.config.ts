@@ -4,6 +4,12 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        cover: ['Covered By Your Grace', 'cursive'],
+        heading: ['Oswald', 'sans-serif'],
+        sans: ['Manrope', 'sans-serif'],
+        serif: ['Instrument Serif', 'serif'],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

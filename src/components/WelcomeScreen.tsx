@@ -16,7 +16,7 @@ export function WelcomeScreen({ onImport, onStartFresh }: WelcomeScreenProps) {
       <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         {/* Logo & Header */}
         <div className="text-center space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight text-black dark:text-white">
+          <h1 className="text-4xl  font-bold tracking-tight text-black dark:text-white">
             Stash
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-500">

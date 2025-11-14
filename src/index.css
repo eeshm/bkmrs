@@ -1,4 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Instrument+Serif:ital@0;1&family=Manrope:wght@200..800&family=Oswald:wght@200..700&display=swap');
 @import "../styles/globals.css";
+
+
+
+@theme{
+  --font-cover: 'Covered By Your Grace', cursive;
+  --font-heading: 'Oswald', sans-serif;
+  --font-sans: 'Manrope', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+
 
 /* cool Bun background animation 😎 */
 body::before {

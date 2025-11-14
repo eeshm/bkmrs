@@ -3,6 +3,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Settings, Bookmark } from 'lucide-react';
 import { type Bookmark as BookmarkType } from '@/types/index';
+import StashLogo from '@/icons/logo';
+import { BookmarkCard } from '@/components/BookmarkCard';
 
 interface DashboardEmptyStateProps {
   bookmarks: BookmarkType[];
@@ -37,12 +39,10 @@ export function DashboardEmptyState({ bookmarks, onAddBookmark, onImportLater }:
       {/* Header */}
       <header className='mx-auto px-4 py-4 flex items-center justify-between'>
           <div className="flex items-center gap-3">
-            <h1 className="text-xl font-bold text-black dark:text-white">
-              Stash
-            </h1>
+            <StashLogo className='size-15'/>
           </div>
-          <Button variant="ghost" size="icon">
-            <Settings className="w-5 h-5" />
+          <Button variant="ghost" size="icon" className='border border-gray-400 rounded-full cursor-pointer'>
+            <Plus className="w-5 h-5" />
           </Button>
       </header>
 
@@ -130,31 +130,14 @@ export function DashboardEmptyState({ bookmarks, onAddBookmark, onImportLater }:
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 Your Bookmarks
               </h2>
-              <Button className=" border" onClick={() => setShowAddForm(true)}>
+              <Button className=" border" onClick={()=> setShowAddForm(true)}>
                 <Plus className="w-4 h-4 mr-2" />
                 Add Bookmark
               </Button>
             </div>
-
             <div className="grid gap-3">
               {bookmarks.map((bookmark) => (
-                <Card key={bookmark.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-4">
-                    <a
-                      href={bookmark.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block space-y-1 group"
-                    >
-                      <h3 className="font-medium text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {bookmark.title}
-                      </h3>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
-                        {bookmark.url}
-                      </p>
-                    </a>
-                  </CardContent>
-                </Card>
+                <BookmarkCard key={bookmark.id} bookmark={bookmark} />
               ))}
             </div>
           </div>
