@@ -6,15 +6,6 @@
     <title>Stash - Personal Bookmark Manager</title>
     <link rel="stylesheet" href="./index.css" />
     <script type="module" src="./frontend.tsx" async></script>
-    <script>
-      // Prevent flash of unstyled content by setting dark mode early
-      const isDark = localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      if (isDark) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
     </script>
   </head>
   <body>

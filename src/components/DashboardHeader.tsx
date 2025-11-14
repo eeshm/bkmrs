@@ -3,7 +3,6 @@ import { Plus, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import StashLogo from '@/icons/logo';
-import { ModeToggle } from './ui/Toggle';
 
 interface DashboardHeaderProps {
   bookmarksCount: number;
@@ -41,7 +40,6 @@ export function DashboardHeader({
                 Import
               </Button>
             )}
-            <ModeToggle />
             <button
               onClick={onAddClick}
               className="border p-2 border-black/50 dark:border-white/50 rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

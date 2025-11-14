@@ -13,9 +13,7 @@ import App from "./App";
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <ThemeProvider attribute="class" disableTransitionOnChange defaultTheme="system" enableSystem>
       <App />
-    </ThemeProvider>
   </StrictMode>
 );
 

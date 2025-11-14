@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { type Bookmark } from '@/types/index';
 import { DashboardHeader } from '@/components/DashboardHeader';
 import { AddEditForm } from '@/components/AddEditForm';
@@ -28,7 +28,6 @@ export function Dashboard({
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
-  const formRef = useRef<HTMLDivElement>(null);
 
   const displayedBookmarks = searchQuery.trim() ? onSearchBookmarks(searchQuery) : bookmarks;
 
@@ -75,17 +74,11 @@ export function Dashboard({
     setTitle(bookmark.title);
     setTags(bookmark.tags?.join(', ') || '');
     setShowAddForm(true);
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
   };
 
   const handleAddNew = () => {
     resetForm();
     setShowAddForm(true);
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
   };
 
   return (
@@ -101,23 +94,22 @@ export function Dashboard({
         showImport={true}
       />
 
+      {/* Add/Edit Form Modal */}
+      <AddEditForm
+        bookmark={editingBookmark}
+        isOpen={showAddForm}
+        url={url}
+        title={title}
+        tags={tags}
+        onUrlChange={setUrl}
+        onTitleChange={setTitle}
+        onTagsChange={setTags}
+        onSubmit={handleSubmit}
+        onClose={resetForm}
+      />
+
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">
-        {/* Add/Edit Form */}
-        <AddEditForm
-          bookmark={editingBookmark}
-          isOpen={showAddForm}
-          url={url}
-          title={title}
-          tags={tags}
-          onUrlChange={setUrl}
-          onTitleChange={setTitle}
-          onTagsChange={setTags}
-          onSubmit={handleSubmit}
-          onClose={resetForm}
-          formRef={formRef}
-        />
-
         {/* Empty State or Bookmarks Grid */}
         {bookmarks.length === 0 ? (
           <EmptyState onAddClick={handleAddNew} />
