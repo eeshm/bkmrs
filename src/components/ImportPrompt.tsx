@@ -1,11 +1,10 @@
 
 import React, { useState, useRef } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Upload, FileText, Loader2, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { Upload, FileText, Loader2, CheckCircle2, ArrowLeft, Info } from 'lucide-react';
 import { parseBookmarksFile } from '@/utils/parseBookmarksFile';
 import { type Bookmark } from '@/types';
+import StashLogo from '@/icons/logo';
 
 interface ImportPromptProps {
   onImportComplete: (bookmarks: Bookmark[]) => void;
@@ -51,103 +50,129 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-4">
-      <div className="w-full max-w-lg space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
-
-        <Card className="border-slate-200 dark:border-slate-800 shadow-xl">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl">Import Your Bookmarks</CardTitle>
-            <CardDescription>
-              Upload your browser's bookmark export file
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Upload Area */}
-            <div
-              onClick={!isImporting ? handleUploadClick : undefined}
-              className={`
-                relative border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300
-                ${isImporting || importSuccess 
-                  ? 'border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/20' 
-                  : 'border-slate-300 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-slate-50 dark:hover:bg-slate-900/50 cursor-pointer'
-                }
-              `}
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".html,.htm"
-                onChange={handleFileUpload}
-                className="hidden"
-                disabled={isImporting}
-              />
-
-              {isImporting ? (
-                <div className="space-y-3">
-                  <Loader2 className="w-12 h-12 mx-auto text-blue-600 animate-spin" />
-                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Importing bookmarks...
-                  </p>
-                </div>
-              ) : importSuccess ? (
-                <div className="space-y-3">
-                  <CheckCircle2 className="w-12 h-12 mx-auto text-green-600" />
-                  <p className="text-sm font-medium text-green-700 dark:text-green-400">
-                    Import successful!
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Upload className="w-12 h-12 mx-auto text-slate-400" />
-                  <div>
-                    <p className="text-base font-medium text-slate-700 dark:text-slate-300">
-                      Drop your bookmarks file here
-                    </p>
-                    <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">
-                      or click to browse
-                    </p>
-                  </div>
-                  <p className="text-xs text-slate-400 dark:text-slate-600">
-                    Supports HTML bookmark exports
-                  </p>
-                </div>
-              )}
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      {/* Header */}
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <StashLogo className="w-8 h-8" />
+              <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Stash</h1>
             </div>
-
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            {/* Instructions */}
-            <Alert className="border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/20">
-              <FileText className="w-4 h-4 text-blue-600" />
-              <AlertDescription className="text-sm text-slate-700 dark:text-slate-300">
-                <strong>How to export from Chrome:</strong><br />
-                Chrome Menu → Bookmarks → Bookmark Manager → ⋮ → Export Bookmarks
-              </AlertDescription>
-            </Alert>
-
             <Button
-              variant="outline"
-              onClick={onSkip}
-              className="w-full"
-              disabled={isImporting}
+              variant="ghost"
+              onClick={onBack}
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full"
             >
-              Skip for now
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
             </Button>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-2xl mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+            Import Your Bookmarks
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Bring your existing bookmarks from any browser
+          </p>
+        </div>
+
+        {/* Upload Area */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 mb-8">
+          <div
+            onClick={!isImporting ? handleUploadClick : undefined}
+            className={`
+              relative border-2 border-dashed rounded-2xl p-16 text-center transition-all duration-300
+              ${isImporting || importSuccess 
+                ? 'border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/20' 
+                : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
+              }
+            `}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".html,.htm"
+              onChange={handleFileUpload}
+              className="hidden"
+              disabled={isImporting}
+            />
+
+            {isImporting ? (
+              <div className="space-y-4">
+                <Loader2 className="w-16 h-16 mx-auto text-blue-600 animate-spin" />
+                <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
+                  Importing your bookmarks...
+                </p>
+              </div>
+            ) : importSuccess ? (
+              <div className="space-y-4">
+                <CheckCircle2 className="w-16 h-16 mx-auto text-green-600" />
+                <p className="text-lg font-medium text-green-700 dark:text-green-400">
+                  Import successful! Redirecting...
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <Upload className="w-16 h-16 mx-auto text-gray-400" />
+                <div>
+                  <p className="text-xl font-medium text-gray-900 dark:text-white mb-2">
+                    Drop your bookmarks file here
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    or click to browse files
+                  </p>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-500">
+                  Supports HTML bookmark exports from any browser
+                </p>
+              </div>
+            )}
+          </div>
+
+          {error && (
+            <div className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+              <p className="text-red-800 dark:text-red-400 text-center font-medium">
+                {error}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Instructions */}
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6 mb-8">
+          <div className="flex gap-3">
+            <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">
+                How to export bookmarks:
+              </h3>
+              <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
+                <li><strong>Chrome/Edge:</strong> Menu → Bookmarks → Bookmark Manager → ⋯ → Export</li>
+                <li><strong>Firefox:</strong> Menu → Bookmarks → Manage Bookmarks → Import & Backup → Export</li>
+                <li><strong>Safari:</strong> File → Export Bookmarks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Skip Button */}
+        <div className="text-center">
+          <Button
+            variant="outline"
+            onClick={onSkip}
+            disabled={isImporting}
+            className="px-8 rounded-full border-gray-300 dark:border-gray-700"
+          >
+            Skip for now
+          </Button>
+        </div>
+      </main>
     </div>
   );
 }

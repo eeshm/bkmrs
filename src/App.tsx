@@ -1,20 +1,20 @@
 import React from 'react';
 import { useOnboardingState } from '@/hooks/useOnboardingState';
-// import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { ImportPrompt } from '@/components/ImportPrompt';
-import { DashboardEmptyState } from '@/components/DashboardEmptyState';
-import {type  Bookmark } from '@/types';
+import { Dashboard } from '@/components/Dashboard';
+import { type Bookmark } from '@/types';
 
 export default function App() {
-  const { step, bookmarks, updateStep, addBookmarks, addBookmark } = useOnboardingState();
-
-  const handleStartFresh = () => {
-    updateStep('dashboard');
-  };
-
-  const handleImport = () => {
-    updateStep('import');
-  };
+  const {
+    step,
+    bookmarks,
+    updateStep,
+    addBookmarks,
+    addBookmark,
+    updateBookmark,
+    deleteBookmark,
+    searchBookmarks,
+  } = useOnboardingState();
 
   const handleImportComplete = (importedBookmarks: Bookmark[]) => {
     addBookmarks(importedBookmarks);
@@ -22,26 +22,15 @@ export default function App() {
   };
 
   const handleBack = () => {
-    updateStep('welcome');
+    updateStep('dashboard');
   };
 
   const handleSkipImport = () => {
     updateStep('dashboard');
   };
 
-  const handleImportLater = () => {
-    updateStep('import');
-  };
-
   return (
-    <>
-      {/* {step === 'welcome' && (
-        <WelcomeScreen
-          onImport={handleImport}
-          onStartFresh={handleStartFresh}
-        />
-      )} */}
-      
+    <>      
       {step === 'import' && (
         <ImportPrompt
           onImportComplete={handleImportComplete}
@@ -51,10 +40,13 @@ export default function App() {
       )}
       
       {step === 'dashboard' && (
-        <DashboardEmptyState
+        <Dashboard
           bookmarks={bookmarks}
           onAddBookmark={addBookmark}
-          onImportLater={handleImportLater}
+          onUpdateBookmark={updateBookmark}
+          onDeleteBookmark={deleteBookmark}
+          onSearchBookmarks={searchBookmarks}
+          onImport={() => updateStep('import')}
         />
       )}
     </>

@@ -7,12 +7,15 @@
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ThemeProvider } from "next-themes";
 import App from "./App";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <App />
+    <ThemeProvider attribute="class" disableTransitionOnChange defaultTheme="system" enableSystem>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );
 
