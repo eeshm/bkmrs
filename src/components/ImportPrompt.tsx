@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, FileText, Loader2, CheckCircle2, ArrowLeft, Info } from 'lucide-react';
 import { parseBookmarksFile } from '@/utils/parseBookmarksFile';
 import { type Bookmark } from '@/types';
-import StashLogo from '@/icons/logo';
+import {StashLogo} from '@/icons/logo';
 
 interface ImportPromptProps {
   onImportComplete: (bookmarks: Bookmark[]) => void;

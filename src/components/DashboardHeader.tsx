@@ -2,7 +2,7 @@ import React from 'react';
 import { Plus, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import StashLogo from '@/icons/logo';
+import {StashLogo} from '@/icons/logo';
 
 interface DashboardHeaderProps {
   bookmarksCount: number;
