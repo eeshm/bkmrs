@@ -37,35 +37,38 @@ export function DashboardHeader({
           <div className="flex items-center ">
             <StashLogo className="size-12" />
           </div>
-          <div className="flex flex-col gap-2 items-end">
+          <div className="flex flex-col items-end">
             {/* Top row: Add button */}
-            <div className="flex gap-2 items-center">
+            <div className="">
               {showImport && bookmarksCount === 0 && onImportClick && (
                 <Button
                   onClick={onImportClick}
-                  className="rounded-lg px-4"
+                  className="rounded-lg px-4 relative bottom-0.5"
                 >
                   Import
                 </Button>
               )}
               <button
                 onClick={onAddClick}
-                className="cursor-pointer transition-colors relative right-1"
+                className="cursor-pointer transition-colors relative px-1"
               >
-                <Plus className="size-4 stroke-gray-600" />
+                <Plus className="size-4 stroke-gray-600 " />
               </button>
             </div>
 
-            {/* Bottom row: Edit, Delete, Search buttons */}
+            {/* Bottom row: Edit, Delete, Search buttons and Search Bar */}
             {bookmarksCount > 0 && (
-              <div className="flex flex-col gap-2 items-center">
+              <div className="flex flex-col gap-2 items-end">
+                {/* Search Bar with Search icon */}
+
+
                 <button
                   onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
                   disabled={editMode === 'delete'}
-                  className={`cursor-pointer transition-all ${editMode === 'edit'
-                    ? 'bg-blue-600 text-white border-blue-600'
+                  className={`cursor-pointer transition-all rounded-lg  p-1 ${editMode === 'edit'
+                    ? 'bg-blue-600'
                     : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
-                      : 'border-black/50 dark:border-white/50 hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : ' hover:bg-blue-400 '
                     }`}
                 >
                   <Edit3 className="size-4 stroke-gray-600" />
@@ -86,47 +89,50 @@ export function DashboardHeader({
                   />
                 </button>
 
-                <button
-                  onClick={() => setShowSearchBar(!showSearchBar)}
-                  className="cursor-pointer "
-                >
-                  <Search className="size-4 stroke-gray-600" />
-                </button>
+                <div className="flex items-center justify-center  h-6">
+                  <AnimatePresence>
+                    {showSearch && showSearchBar && (
+                      <motion.div
+                        initial={{ opacity: 0, width: 0 }}
+                        animate={{ opacity: 1, width: 'auto' }}
+                        exit={{ opacity: 0, width: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative overflow-hidden"
+                      >
+                        <Search className="absolute left-1 top-1/2 transform -translate-y-1/2 size-3 text-gray-400 pointer-events-none" />
+                        <Input
+                          type="text"
+                          placeholder="Search..."
+                          value={searchQuery}
+                          onChange={(e) => onSearchChange(e.target.value)}
+                          autoFocus
+                          className={cn("pl-6 rounded-lg placeholder:text-gray-400 text-xs pr-10 bg-gray-100 dark:bg-gray-800 border-0 h-9 w-60",
+                            "focus-visible:outline-none focus-visible:ring-0 focus-visible:border-0"
+                          )}
+                        />
+                        {searchQuery && (
+                          <button
+                            onClick={() => onSearchChange('')}
+                            className="absolute right-1  top-1/2 transform -translate-y-1/2 text-gray-400 stroke-0 hover:text-gray-600 dark:hover:text-gray-300"
+                          >
+                            <X className="size-3" />
+                          </button>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <button
+                    onClick={() => setShowSearchBar(!showSearchBar)}
+                    className="cursor-pointer p-1 flex items-center justify-center shrink-0"
+                  >
+                    <Search className="size-4 stroke-gray-600" />
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
-
-        {/* Search Bar - Slide in animation */}
-        {showSearch && bookmarksCount > 0 && showSearchBar && (
-          <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mt-4 relative overflow-hidden"
-            >
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search bookmarks..."
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                autoFocus
-                className="pl-10 pr-10 bg-gray-100 dark:bg-gray-800 border-0 rounded-full focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-600 h-9"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => onSearchChange('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  <X className="size-4" />
-                </button>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        )}
       </div>
     </header>
   );
