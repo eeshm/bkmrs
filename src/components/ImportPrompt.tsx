@@ -50,21 +50,20 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800">
+      <header className="">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <StashLogo className="w-8 h-8" />
-              <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Stash</h1>
             </div>
             <Button
               variant="ghost"
               onClick={onBack}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full text-xs"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft className="size-3" />
               Back
             </Button>
           </div>

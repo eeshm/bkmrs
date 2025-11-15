@@ -7,8 +7,14 @@ export interface PageMetadata {
 
 export async function extractPageMetadata(url: string): Promise<PageMetadata> {
   try {
-    // Use microlink API for metadata extraction - no CORS issues
-    const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`);
+    // Validate URL first
+    new URL(url);
+    
+    // Use microlink API for metadata extraction
+    const response = await fetch(`https://api.microlink.io?url=${encodeURIComponent(url)}`, {
+      signal: AbortSignal.timeout(5000), // 5 second timeout
+    });
+    
     const data = await response.json();
     
     if (data.data) {
@@ -20,15 +26,31 @@ export async function extractPageMetadata(url: string): Promise<PageMetadata> {
       };
     }
     
-    throw new Error('No metadata found');
-  } catch (error) {
-    console.error('Metadata extraction failed, falling back to favicon:', error);
+    // Fallback if no data
     return {
       title: new URL(url).hostname,
       image: null,
       description: null,
       favicon: getFaviconUrl(url),
     };
+  } catch (error) {
+    console.error('Metadata extraction failed:', error);
+    // Always return favicon as fallback
+    try {
+      return {
+        title: new URL(url).hostname,
+        image: null,
+        description: null,
+        favicon: getFaviconUrl(url),
+      };
+    } catch {
+      return {
+        title: 'Bookmark',
+        image: null,
+        description: null,
+        favicon: null,
+      };
+    }
   }
 }
 

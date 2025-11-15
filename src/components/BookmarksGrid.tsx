@@ -8,6 +8,7 @@ interface BookmarksGridProps {
   onEdit: (bookmark: Bookmark) => void;
   onDelete: (id: string) => void;
   onClearSearch: () => void;
+  editMode?: 'edit' | 'delete' | null;
 }
 
 export function BookmarksGrid({
@@ -16,6 +17,7 @@ export function BookmarksGrid({
   onEdit,
   onDelete,
   onClearSearch,
+  editMode,
 }: BookmarksGridProps) {
   return (
     <>
@@ -37,6 +39,7 @@ export function BookmarksGrid({
               bookmark={bookmark}
               onEdit={onEdit}
               onDelete={onDelete}
+              editMode={editMode}
             />
           ))}
         </div>

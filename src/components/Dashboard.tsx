@@ -30,6 +30,7 @@ export function Dashboard({
   const [tags, setTags] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [favicon, setFavicon] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState<'edit' | 'delete' | null>(null);
 
   const displayedBookmarks = searchQuery.trim() ? onSearchBookmarks(searchQuery) : bookmarks;
 
@@ -75,13 +76,22 @@ export function Dashboard({
   };
 
   const handleEdit = (bookmark: Bookmark) => {
-    setEditingBookmark(bookmark);
-    setUrl(bookmark.url);
-    setTitle(bookmark.title);
-    setTags(bookmark.tags?.join(', ') || '');
-    setImage(bookmark.image || null);
-    setFavicon(bookmark.favicon || null);
-    setShowAddForm(true);
+    if (editMode === 'edit') {
+      setEditingBookmark(bookmark);
+      setUrl(bookmark.url);
+      setTitle(bookmark.title);
+      setTags(bookmark.tags?.join(', ') || '');
+      setImage(bookmark.image || null);
+      setFavicon(bookmark.favicon || null);
+      setShowAddForm(true);
+      setEditMode(null);
+    }
+  };
+
+  const handleDelete = (id: string) => {
+    if (editMode === 'delete') {
+      onDeleteBookmark(id);
+    }
   };
 
   const handleAddNew = () => {
@@ -100,6 +110,8 @@ export function Dashboard({
         onImportClick={onImport}
         showSearch={true}
         showImport={true}
+        editMode={editMode}
+        onEditModeChange={setEditMode}
       />
 
       {/* Add/Edit Form Modal */}
@@ -122,6 +134,8 @@ export function Dashboard({
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">
+        {/* Control Buttons - Moved to header */}
+
         {/* Empty State or Bookmarks Grid */}
         {bookmarks.length === 0 ? (
           <EmptyState onAddClick={handleAddNew} />
@@ -130,8 +144,9 @@ export function Dashboard({
             bookmarks={displayedBookmarks}
             searchQuery={searchQuery}
             onEdit={handleEdit}
-            onDelete={onDeleteBookmark}
+            onDelete={handleDelete}
             onClearSearch={() => setSearchQuery('')}
+            editMode={editMode}
           />
         )}
       </main>

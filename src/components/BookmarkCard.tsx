@@ -1,14 +1,17 @@
 import React from 'react';
 import { ExternalLink, Trash2, Edit3 } from 'lucide-react';
 import { type Bookmark } from '@/types/index';
+import { motion } from 'motion/react';
+import { TrashIcon123 } from '@/icons/logo';
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
   onDelete?: (id: string) => void;
   onEdit?: (bookmark: Bookmark) => void;
+  editMode?: 'edit' | 'delete' | null;
 }
 
-export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) {
+export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkCardProps) {
   const getDomain = (url: string) => {
     try {
       return new URL(url).hostname;
@@ -18,13 +21,19 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
   };
 
   return (
-    <div className="group relative bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-200 hover:border-gray-200 p-4">
+    <motion.div
+      key={editMode}
+      initial={editMode ? { x: 0 } : false}
+      animate={editMode ? { x: [0, -8, 8, -8, 8, 0] } : { x: 0 }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
+      className="group relative bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-200 hover:border-gray-200 "
+    >
       {/* Main content */}
       <a
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="block space-y-2"
+        className={`block space-y-2 p-2 ${editMode ? 'pointer-events-none' : ''}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -47,7 +56,9 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
               {getDomain(bookmark.url)}
             </p>
           </div>
-          <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5" />
+          {!editMode && (
+            <ExternalLink className="size-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5" />
+          )}
         </div>
         
         {bookmark.tags && bookmark.tags.length > 0 && (
@@ -69,31 +80,27 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
         )}
       </a>
 
-      {/* Action buttons */}
-      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-        {onEdit && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onEdit(bookmark);
-            }}
-            className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-          >
-            <Edit3 className="w-4 h-4" />
-          </button>
-        )}
-        {onDelete && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onDelete(bookmark.id);
-            }}
-            className="p-1.5 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-        )}
-      </div>
-    </div>
+      {/* Action buttons - Show only in edit/delete mode */}
+      {editMode && (
+        <div className="absolute top-1 right-1">
+          {editMode === 'edit' && onEdit && (
+            <button
+              onClick={() => onEdit(bookmark)}
+              className="flex-1 cursor-pointer text-black transition-colors "
+            >
+              <Edit3 className="size-3" />
+            </button>
+          )}
+          {editMode === 'delete' && onDelete && (
+            <button
+              onClick={() => onDelete(bookmark.id)}
+              className="flex- text-red-500  transition-colors cursor-pointer"
+            >
+              <TrashIcon123 className="size-4" />
+            </button>
+          )}
+        </div>
+      )}
+    </motion.div>
   );
 }
