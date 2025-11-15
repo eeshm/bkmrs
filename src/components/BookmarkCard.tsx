@@ -18,7 +18,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
   };
 
   return (
-    <div className="group relative bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-4 hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-gray-800/50 transition-all duration-200 hover:border-gray-200 dark:hover:border-gray-700">
+    <div className="group relative bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-200 hover:border-gray-200 p-4">
       {/* Main content */}
       <a
         href={bookmark.url}
@@ -28,14 +28,26 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              {bookmark.title}
-            </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <div className="flex items-center gap-2 mb-1">
+              {bookmark.favicon && (
+                <img
+                  src={bookmark.favicon}
+                  alt=""
+                  className="w-5 h-5 rounded shrink-0"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              )}
+              <h3 className="font-medium text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                {bookmark.title}
+              </h3>
+            </div>
+            <p className="text-sm text-gray-500">
               {getDomain(bookmark.url)}
             </p>
           </div>
-          <ExternalLink className="w-4 h-4 text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+          <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5" />
         </div>
         
         {bookmark.tags && bookmark.tags.length > 0 && (
@@ -43,13 +55,13 @@ export function BookmarkCard({ bookmark, onDelete, onEdit }: BookmarkCardProps) 
             {bookmark.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-md"
+                className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-md"
               >
                 {tag}
               </span>
             ))}
             {bookmark.tags.length > 3 && (
-              <span className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400">
+              <span className="px-2 py-1 text-xs text-gray-500">
                 +{bookmark.tags.length - 3} more
               </span>
             )}

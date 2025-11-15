@@ -28,6 +28,8 @@ export function Dashboard({
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
+  const [image, setImage] = useState<string | null>(null);
+  const [favicon, setFavicon] = useState<string | null>(null);
 
   const displayedBookmarks = searchQuery.trim() ? onSearchBookmarks(searchQuery) : bookmarks;
 
@@ -35,6 +37,8 @@ export function Dashboard({
     setUrl('');
     setTitle('');
     setTags('');
+    setImage(null);
+    setFavicon(null);
     setShowAddForm(false);
     setEditingBookmark(null);
   };
@@ -48,6 +52,8 @@ export function Dashboard({
       title: title.trim() || (await getPageTitle(url)) || new URL(url).hostname,
       url: url.trim(),
       tags: tags.trim() ? tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
+      image: image || null,
+      favicon: favicon || null,
       createdAt: editingBookmark?.createdAt || new Date().toISOString(),
     };
 
@@ -73,6 +79,8 @@ export function Dashboard({
     setUrl(bookmark.url);
     setTitle(bookmark.title);
     setTags(bookmark.tags?.join(', ') || '');
+    setImage(bookmark.image || null);
+    setFavicon(bookmark.favicon || null);
     setShowAddForm(true);
   };
 
@@ -101,9 +109,13 @@ export function Dashboard({
         url={url}
         title={title}
         tags={tags}
+        image={image}
+        favicon={favicon}
         onUrlChange={setUrl}
         onTitleChange={setTitle}
         onTagsChange={setTags}
+        onImageChange={setImage}
+        onFaviconChange={setFavicon}
         onSubmit={handleSubmit}
         onClose={resetForm}
       />

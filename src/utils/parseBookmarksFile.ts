@@ -1,13 +1,14 @@
 import { type Bookmark } from '@/types';
+import { getFaviconUrl } from '@/utils/extractMetadata';
 
 export async function parseBookmarksFile(file: File): Promise<Bookmark[]> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const html = e.target?.result as string;
-        const bookmarks = extractBookmarksFromHTML(html);
+        const bookmarks = await extractBookmarksFromHTML(html);
         resolve(bookmarks);
       } catch (error) {
         reject(error);
@@ -19,26 +20,28 @@ export async function parseBookmarksFile(file: File): Promise<Bookmark[]> {
   });
 }
 
-function extractBookmarksFromHTML(html: string): Bookmark[] {
+async function extractBookmarksFromHTML(html: string): Promise<Bookmark[]> {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const links = doc.querySelectorAll('a');
   
   const bookmarks: Bookmark[] = [];
   
-  links.forEach((link, index) => {
-    const url = link.getAttribute('href');
-    const title = link.textContent || 'Untitled';
+  for (let index = 0; index < links.length; index++) {
+    const link = links[index];
+    const url = link?.getAttribute('href');
+    const title = link?.textContent || 'Untitled';
     
     if (url && url.startsWith('http')) {
       bookmarks.push({
         id: `bookmark_${Date.now()}_${index}`,
         title: title.trim(),
         url: url.trim(),
+        favicon: getFaviconUrl(url),
         createdAt: new Date().toISOString(),
       });
     }
-  });
+  }
   
   return bookmarks;
 }

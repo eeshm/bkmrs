@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { type Bookmark } from '@/types/index';
 import { motion, AnimatePresence } from 'motion/react';
+import { extractPageMetadata } from '@/utils/extractMetadata';
 
 interface AddEditFormProps {
   bookmark?: Bookmark | null;
@@ -11,9 +12,13 @@ interface AddEditFormProps {
   url: string;
   title: string;
   tags: string;
+  image: string | null;
+  favicon: string | null;
   onUrlChange: (value: string) => void;
   onTitleChange: (value: string) => void;
   onTagsChange: (value: string) => void;
+  onImageChange: (value: string | null) => void;
+  onFaviconChange: (value: string | null) => void;
   onSubmit: (e: React.FormEvent) => void;
   onClose: () => void;
 }
@@ -24,12 +29,18 @@ export function AddEditForm({
   url,
   title,
   tags,
+  image,
+  favicon,
   onUrlChange,
   onTitleChange,
   onTagsChange,
+  onImageChange,
+  onFaviconChange,
   onSubmit,
   onClose,
 }: AddEditFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -40,6 +51,28 @@ export function AddEditForm({
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
+
+  // Extract metadata when URL changes
+  useEffect(() => {
+    if (!isOpen || !url.trim() || url === bookmark?.url) return;
+
+    const extractMetadata = async () => {
+      setIsLoading(true);
+      try {
+        const metadata = await extractPageMetadata(url);
+        if (!title) onTitleChange(metadata.title);
+        if (!image) onImageChange(metadata.image);
+        onFaviconChange(metadata.favicon);
+      } catch (error) {
+        console.error('Failed to extract metadata:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const debounce = setTimeout(extractMetadata, 800);
+    return () => clearTimeout(debounce);
+  }, [url, isOpen, title, image, onTitleChange, onImageChange, onFaviconChange, bookmark?.url]);
 
   return (
     <AnimatePresence>
@@ -77,18 +110,25 @@ export function AddEditForm({
               
               <form onSubmit={onSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     URL *
                   </label>
-                  <Input
-                    type="url"
-                    value={url}
-                    onChange={(e) => onUrlChange(e.target.value)}
-                    placeholder="https://example.com"
-                    required
-                    autoFocus
-                    className="rounded-lg text-xs border-gray-200 focus:ring-2 h-8 focus:ring-gray-400"
-                  />
+                  <div className="flex gap-2">
+                    <Input
+                      type="url"
+                      value={url}
+                      onChange={(e) => onUrlChange(e.target.value)}
+                      placeholder="https://example.com"
+                      required
+                      autoFocus
+                      className="flex-1 rounded-xl border-gray-200 focus:ring-2 focus:ring-gray-400"
+                    />
+                    {isLoading && (
+                      <div className="flex items-center px-3">
+                        <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
+                      </div>
+                    )}
+                  </div>
                 </div>
                 
                 <div className="flex gap-1 w-full">
