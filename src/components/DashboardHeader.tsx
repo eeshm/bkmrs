@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Plus, Search, X, Edit3 } from 'lucide-react';
+import { Plus, Search, X, Edit3, CirclePlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { TrashIcon123, StashLogo } from '@/icons/logo';
+import { TrashIcon123, StashLogo, EditIcon, PlusIcon } from '@/icons/logo';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "motion/react";
 
@@ -50,33 +50,31 @@ export function DashboardHeader({
               )}
               <button
                 onClick={onAddClick}
-                className="cursor-pointer transition-colors relative px-1"
+                className="cursor-pointer transition-colors relative pb-3 pr-2"
               >
-                <Plus className="size-4 stroke-gray-600 " />
+                <PlusIcon className="size-4"/>
               </button>
             </div>
 
             {/* Bottom row: Edit, Delete, Search buttons and Search Bar */}
             {bookmarksCount > 0 && (
-              <div className="flex flex-col gap-2 items-end">
-                {/* Search Bar with Search icon */}
-
+              <div className="flex flex-col gap-2 space-y-2 pr-2 items-end ">
 
                 <button
                   onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
                   disabled={editMode === 'delete'}
-                  className={`cursor-pointer transition-all rounded-lg  p-1 ${editMode === 'edit'
+                  className={`cursor-pointer transition-all rounded-lg${editMode === 'edit'
                     ? 'bg-blue-600'
                     : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
                       : ' hover:bg-blue-400 '
                     }`}
                 >
-                  <Edit3 className="size-4 stroke-gray-600" />
+                  <EditIcon className="size-3.5 stroke-gray-600" />
                 </button>
                 <button
                   onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
                   disabled={editMode === 'edit'}
-                  className={` p-1 rounded-lg cursor-pointer transition-all group ${editMode === 'delete'
+                  className={`rounded-lg cursor-pointer transition-all group ${editMode === 'delete'
                     ? 'bg-red-600 border-red-600'
                     : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
                       : 'dark:border-white/50 hover:bg-red-200'
@@ -97,17 +95,18 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative overflow-hidden"
+                        className="relative overflow-hidden font-semibold"
                       >
                         <Search className="absolute left-1 top-1/2 transform -translate-y-1/2 size-3 text-gray-400 pointer-events-none" />
-                        <Input
+                        <input
                           type="text"
                           placeholder="Search..."
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("pl-6 rounded-lg placeholder:text-gray-400 text-xs pr-10 bg-gray-100 dark:bg-gray-800 border-0 h-9 w-60",
-                            "focus-visible:outline-none focus-visible:ring-0 focus-visible:border-0"
+                          className={cn("pl-5 rounded-lg placeholder:text-gray-400 text-xs pr-10 bg-gray-100 dark:bg-gray-800 border-0 h-9 w-60",
+                            "focus-visible:outline-none focus-visible:ring-0",
+                            "border border-gray-300 dark:border-gray-700",
                           )}
                         />
                         {searchQuery && (
@@ -124,7 +123,7 @@ export function DashboardHeader({
 
                   <button
                     onClick={() => setShowSearchBar(!showSearchBar)}
-                    className="cursor-pointer p-1 flex items-center justify-center shrink-0"
+                    className="cursor-pointer flex items-center justify-center shrink-0"
                   >
                     <Search className="size-4 stroke-gray-600" />
                   </button>

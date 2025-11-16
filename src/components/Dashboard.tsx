@@ -133,7 +133,7 @@ export function Dashboard({
       />
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className=" mx-auto px-4 py-8">
         {/* Control Buttons - Moved to header */}
 
         {/* Empty State or Bookmarks Grid */}

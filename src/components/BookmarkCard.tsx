@@ -3,6 +3,7 @@ import { ExternalLink, Trash2, Edit3 } from 'lucide-react';
 import { type Bookmark } from '@/types/index';
 import { motion } from 'motion/react';
 import { TrashIcon123 } from '@/icons/logo';
+import { cn } from '@/lib/utils';
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -24,60 +25,39 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
     <motion.div
       key={editMode}
       initial={editMode ? { x: 0 } : false}
-      animate={editMode ? { x: [0, -8, 8, -8, 8, 0] } : { x: 0 }}
-      transition={{ duration: 0.6, ease: 'easeInOut' }}
-      className="group relative bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-200 hover:border-gray-200 "
+      animate={editMode ? { x: [0, -18, 18, -18, 18, 0]  , y: [0, -10, 10, -10, 10, 0]} : { x: 0 , y: 0 }}
+      transition={{  ease:"easeInOut", duration: 0.12 }}
+      whileHover={{ y: -8,rotate: 1 }}
+      className={cn("group relative bg-white border w-auto h-9",
+        "flex items-center justify border-gray-100 rounded-xl overflow-hidden max-w-xs",
+         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
+        )}
     >
       {/* Main content */}
       <a
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`block space-y-2 p-2 ${editMode ? 'pointer-events-none' : ''}`}
+        className={`flex items-center w-full gap-2 p-2 ${editMode ? 'pointer-events-none' : ''}`}
       >
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              {bookmark.favicon && (
-                <img
-                  src={bookmark.favicon}
-                  alt=""
-                  className="w-5 h-5 rounded shrink-0"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-              )}
-              <h3 className="font-medium text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                {bookmark.title}
-              </h3>
-            </div>
-            <p className="text-sm text-gray-500">
-              {getDomain(bookmark.url)}
-            </p>
-          </div>
-          {!editMode && (
-            <ExternalLink className="size-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5" />
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          {bookmark.favicon && (
+            <img
+              src={bookmark.favicon}
+              alt=""
+              className="w-5 h-5 rounded shrink-0"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           )}
+          <h3 className="font-medium text-xs text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+            {bookmark.title}
+          </h3>
         </div>
-        
-        {bookmark.tags && bookmark.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {bookmark.tags.slice(0, 3).map((tag, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-md"
-              >
-                {tag}
-              </span>
-            ))}
-            {bookmark.tags.length > 3 && (
-              <span className="px-2 py-1 text-xs text-gray-500">
-                +{bookmark.tags.length - 3} more
-              </span>
-            )}
-          </div>
-        )}
+        <p className="text-[10px] text-gray-500 truncate shrink-0">
+          {getDomain(bookmark.url)}
+        </p>
       </a>
 
       {/* Action buttons - Show only in edit/delete mode */}

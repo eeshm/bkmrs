@@ -101,7 +101,7 @@ export function AddEditForm({
             initial={{ opacity: 0, y: -500, x: 700, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, y: -50, x: -100, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 ,duration: 0.6}}
             className="fixed top-25 sm:top-50 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex  justify-center"
           >
             <div className=" bg-white rounded-md border border-white/20 shadow-2xl w-[450px]">

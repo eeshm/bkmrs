@@ -52,3 +52,23 @@ export function TrashIcon123({ fill = "currentColor", secondaryfill, ...props }:
     </svg>
   );
 }
+
+
+export function EditIcon(props: React.SVGProps<SVGSVGElement>) {
+  return(
+    <svg xmlns="http://www.w3.org/2000/svg"
+    x="0px" 
+    y="0px" 
+    width="24px"
+    height="24px" 
+    viewBox="0 0 24 24" {...props}><line data-cap="butt" data-color="color-2" x1="14" y1="5" x2="19" y2="10" fill="none" stroke="rgba(75, 85, 99, 1)" stroke-miterlimit="10" stroke-width="2">
+    </line><path d="M9,20l-7,2,2-7L16.414,2.586c.781-.781,2.047-.781,2.828,0l2.172,2.172c.781,.781,.781,2.047,0,2.828l-12.414,12.414Z" fill="none" stroke="rgba(75, 85, 99, 1)" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></svg>
+
+  )
+}
+
+
+export function PlusIcon(props: React.SVGProps<SVGSVGElement>) {
+    return(
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" {...props}><path d="m16,1C7.729,1,1,7.729,1,16s6.729,15,15,15,15-6.729,15-15S24.271,1,16,1Zm7,16h-6v6h-2v-6h-6v-2h6v-6h2v6h6v2Z" stroke-width="0" fill="rgba(115, 115, 119, 1)"></path></svg>
+    )}
