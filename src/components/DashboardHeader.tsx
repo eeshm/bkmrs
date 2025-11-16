@@ -37,57 +37,11 @@ export function DashboardHeader({
           <div className="flex items-center ">
             <StashLogo className="size-12" />
           </div>
-          <div className="flex flex-col items-end">
-            {/* Top row: Add button */}
-            <div className="p-1">
-              {showImport && bookmarksCount === 0 && onImportClick && (
-                <Button
-                  onClick={onImportClick}
-                  className="rounded-lg px-4 relative bottom-1 cursor-pointer underline"
-                >
-                  Import
-                </Button>
-              )}
-              <button
-                onClick={onAddClick}
-                className="cursor-pointer transition-colors relative pb-3 pr-2"
-              >
-                <PlusIcon className="size-4"/>
-              </button>
-            </div>
-
-            {/* Bottom row: Edit, Delete, Search buttons and Search Bar */}
-            {bookmarksCount > 0 && (
-              <div className="flex flex-col gap-2 space-y-2 pr-2 items-end ">
-
-                <button
-                  onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
-                  disabled={editMode === 'delete'}
-                  className={`p-1 cursor-pointer transition-all rounded-lg${editMode === 'edit'
-                    ? 'bg-blue-600'
-                    : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
-                      : ' hover:bg-blue-400 '
-                    }`}
-                >
-                  <EditIcon className="size-3.5 stroke-gray-600" />
-                </button>
-                <button
-                  onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
-                  disabled={editMode === 'edit'}
-                  className={`rounded-lg cursor-pointer transition-all group p-1 ${editMode === 'delete'
-                    ? 'bg-red-600 border-red-600'
-                    : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
-                      : 'dark:border-white/50 hover:bg-red-200'
-                    }`}
-                >
-                  <TrashIcon123
-                    className="size-4"
-                    fill={editMode === 'delete' ? 'white' : 'var(--color-red-600)'}
-                    secondaryfill={editMode === 'delete' ? 'var(--color-gray-200)' : 'var(--color-red-700)'}
-                  />
-                </button>
-
-                <div className="flex items-center p-1 justify-center h-6">
+          <div className="flex flex-col items-end ">
+            {/* Top row: All action buttons in one line */}
+            <div className="flex flex-row items-center gap-2 h-6">
+              {bookmarksCount > 0 && (
+                <div className="flex items-center h-full">
                   <AnimatePresence>
                     {showSearch && showSearchBar && (
                       <motion.div
@@ -95,24 +49,23 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative overflow-hidden font-semibold"
+                        className="relative overflow-hidden h-full flex items-center"
                       >
-                        <Search className="absolute left-1 top-1/2 transform -translate-y-1/2 size-3 text-gray-400 pointer-events-none" />
+                        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 size-3 text-gray-400 pointer-events-none" />
                         <input
                           type="text"
                           placeholder="Search..."
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("pl-5 rounded-lg placeholder:text-gray-400 text-xs pr-10 bg-gray-100 dark:bg-gray-800 border-0 h-9 w-60",
-                            "focus-visible:outline-none focus-visible:ring-0",
-                            "border border-gray-300 dark:border-gray-700",
+                          className={cn("pl-6 rounded-lg placeholder:text-gray-400 text-xs pr-2 bg-gray-100 dark:bg-gray-800 border-0 h-full w-56",
+                            "focus-visible:outline-none focus-visible:ring-0 border border-gray-300 dark:border-gray-700"
                           )}
                         />
                         {searchQuery && (
                           <button
                             onClick={() => onSearchChange('')}
-                            className="absolute right-1  top-1/2 transform -translate-y-1/2 text-gray-400 stroke-0 hover:text-gray-600 dark:hover:text-gray-300"
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                           >
                             <X className="size-3" />
                           </button>
@@ -123,13 +76,60 @@ export function DashboardHeader({
 
                   <button
                     onClick={() => setShowSearchBar(!showSearchBar)}
-                    className="cursor-pointer flex items-center justify-center shrink-0"
+                    className="cursor-pointer flex items-center justify-center p-1 h-full"
                   >
                     <Search className="size-4 stroke-gray-600" />
                   </button>
                 </div>
-              </div>
-            )}
+              )}
+
+              {showImport && bookmarksCount === 0 && onImportClick && (
+                <Button
+                  onClick={onImportClick}
+                  className="rounded-lg px-4 cursor-pointer underline"
+                >
+                  Import
+                </Button>
+              )}
+
+              {bookmarksCount > 0 && (
+                <>
+                  <button
+                    onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
+                    disabled={editMode === 'delete'}
+                    className={`p-1 cursor-pointer transition-all rounded-lg ${editMode === 'edit'
+                      ? 'bg-blue-600'
+                      : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
+                        : 'hover:bg-blue-400'
+                      }`}
+                  >
+                    <EditIcon className="size-3.5 stroke-gray-600" />
+                  </button>
+                  <button
+                    onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
+                    disabled={editMode === 'edit'}
+                    className={`p-1 rounded-lg cursor-pointer transition-all ${editMode === 'delete'
+                      ? 'bg-red-600'
+                      : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
+                        : 'hover:bg-red-200'
+                      }`}
+                  >
+                    <TrashIcon123
+                      className="size-4"
+                      fill={editMode === 'delete' ? 'white' : 'var(--color-red-600)'}
+                      secondaryfill={editMode === 'delete' ? 'var(--color-gray-200)' : 'var(--color-red-700)'}
+                    />
+                  </button>
+                </>
+              )}
+
+              <button
+                onClick={onAddClick}
+                className="cursor-pointer transition-colors p-1"
+              >
+                <PlusIcon className="size-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
