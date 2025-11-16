@@ -22,13 +22,13 @@ export function BookmarksGrid({
   return (
     <>
       {/* Search Results Info */}
-      {searchQuery && (
+      {/* {searchQuery && (
         <div className="mb-6">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             {bookmarks.length} result{bookmarks.length !== 1 ? 's' : ''} for "{searchQuery}"
           </p>
         </div>
-      )}
+      )} */}
 
       {/* Bookmarks Grid */}
       {bookmarks.length > 0 ? (

@@ -2,6 +2,7 @@ import React from 'react';
 import { useOnboardingState } from '@/hooks/useOnboardingState';
 import { ImportPrompt } from '@/components/ImportPrompt';
 import { Dashboard } from '@/components/Dashboard';
+import { AppLayout } from '@/components/AppLayout';
 import { type Bookmark } from '@/types';
 
 export default function App() {
@@ -30,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <>      
+    <AppLayout>
       {step === 'import' && (
         <ImportPrompt
           onImportComplete={handleImportComplete}
@@ -49,6 +50,6 @@ export default function App() {
           onImport={() => updateStep('import')}
         />
       )}
-    </>
+    </AppLayout>
   );
 }

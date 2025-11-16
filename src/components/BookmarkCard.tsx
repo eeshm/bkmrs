@@ -27,8 +27,8 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
   initial={editMode ? { x: 0, y: 0 } : false}
   animate={editMode
     ? {
-        x: [0, 10, -10, 0], // Move horizontally with alternating values for a zigzag effect
-        y: [0, -6, 6, 0],      // Move vertically in the opposite direction of x for zigzagging
+        x: [0, 10, -10, 0], 
+        y: [0, -6, 6, 0], 
       }
     : { x: 0, y: 0 }
   }

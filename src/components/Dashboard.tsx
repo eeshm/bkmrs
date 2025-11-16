@@ -100,19 +100,21 @@ export function Dashboard({
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <DashboardHeader
-        bookmarksCount={bookmarks.length}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onAddClick={handleAddNew}
-        onImportClick={onImport}
-        showSearch={true}
-        showImport={true}
-        editMode={editMode}
-        onEditModeChange={setEditMode}
-      />
+    <div className="h-screen bg-white flex flex-col overflow-hidden">
+      {/* Header - White Background */}
+      <div className="shrink-0">
+        <DashboardHeader
+          bookmarksCount={bookmarks.length}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onAddClick={handleAddNew}
+          onImportClick={onImport}
+          showSearch={true}
+          showImport={true}
+          editMode={editMode}
+          onEditModeChange={setEditMode}
+        />
+      </div>
 
       {/* Add/Edit Form Modal */}
       <AddEditForm
@@ -132,23 +134,25 @@ export function Dashboard({
         onClose={resetForm}
       />
 
-      {/* Main Content */}
-      <main className=" mx-auto px-4 py-8">
-        {/* Control Buttons - Moved to header */}
-
-        {/* Empty State or Bookmarks Grid */}
-        {bookmarks.length === 0 ? (
-          <EmptyState onAddClick={handleAddNew} />
-        ) : (
-          <BookmarksGrid
-            bookmarks={displayedBookmarks}
-            searchQuery={searchQuery}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onClearSearch={() => setSearchQuery('')}
-            editMode={editMode}
-          />
-        )}
+      {/* Main Content - Gray Rounded Section */}
+      <main className="flex-1 overflow-hidden flex flex-col">
+        <div className="mx-auto max-w-[1500px] w-full h-full p-1 flex flex-col">
+          <div className="bg-gray-100 rounded-xl flex-1 py-4 px-2 overflow-auto border border-gray-200">
+            {/* Empty State or Bookmarks Grid */}
+            {bookmarks.length === 0 ? (
+              <EmptyState onAddClick={handleAddNew} />
+            ) : (
+              <BookmarksGrid
+                bookmarks={displayedBookmarks}
+                searchQuery={searchQuery}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onClearSearch={() => setSearchQuery('')}
+                editMode={editMode}
+              />
+            )}
+          </div>
+        </div>
       </main>
     </div>
   );

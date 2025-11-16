@@ -53,7 +53,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
     <div className="min-h-screen">
       {/* Header */}
       <header className="">
-        <div className="mx-auto max-w-[1480px] px-2 py-4">
+        <div className="mx-auto max-w-[1500px] px-2 py-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center ">
               <StashLogo className="size-12" />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, Search, X, Edit3, CirclePlus } from 'lucide-react';
+import { Search, X, } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { TrashIcon123, StashLogo, EditIcon, PlusIcon } from '@/icons/logo';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "motion/react";
@@ -32,9 +31,9 @@ export function DashboardHeader({
   const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <header className="">
-      <div className="mx-auto max-w-[1480px] px-2 py-4">
+      <div className="mx-auto max-w-[1500px] px-2 pt-4 pb-2">
         <div className="flex items-start justify-between">
-          <div className="flex items-center ">
+          <div className="flex">
             <StashLogo className="size-12" />
           </div>
           <div className="flex flex-col items-end ">
