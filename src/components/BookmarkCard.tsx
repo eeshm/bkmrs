@@ -22,17 +22,28 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
   };
 
   return (
-    <motion.div
-      key={editMode}
-      initial={editMode ? { x: 0 } : false}
-      animate={editMode ? { x: [0, -18, 18, -18, 18, 0]  , y: [0, -10, 10, -10, 10, 0]} : { x: 0 , y: 0 }}
-      transition={{  ease:"easeInOut", duration: 0.12 }}
-      whileHover={{ y: -8,rotate: 1 }}
-      className={cn("group relative bg-white border w-auto h-9",
-        "flex items-center justify border-gray-100 rounded-xl overflow-hidden max-w-xs",
-         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
-        )}
-    >
+<motion.div
+  key={editMode}
+  initial={editMode ? { x: 0, y: 0 } : false}
+  animate={editMode
+    ? {
+        x: [0, 10, -10, 0], // Move horizontally with alternating values for a zigzag effect
+        y: [0, -6, 6, 0],      // Move vertically in the opposite direction of x for zigzagging
+      }
+    : { x: 0, y: 0 }
+  }
+  transition={{
+    ease: "easeInOut",
+    duration: 0.9,
+    repeatType: "loop", // Infinite loop on each direction change
+  }}
+  whileHover={!editMode ? { y: -8, rotate: 1 } : undefined}
+  className={cn(
+    "group relative bg-white border w-auto h-9",
+    "flex items-center justify border-gray-100 rounded-md overflow-hidden max-w-xs",
+    "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
+  )}
+>
       {/* Main content */}
       <a
         href={bookmark.url}

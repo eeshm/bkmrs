@@ -39,11 +39,11 @@ export function DashboardHeader({
           </div>
           <div className="flex flex-col items-end">
             {/* Top row: Add button */}
-            <div className="">
+            <div className="p-1">
               {showImport && bookmarksCount === 0 && onImportClick && (
                 <Button
                   onClick={onImportClick}
-                  className="rounded-lg px-4 relative bottom-0.5"
+                  className="rounded-lg px-4 relative bottom-1 cursor-pointer underline"
                 >
                   Import
                 </Button>
@@ -63,7 +63,7 @@ export function DashboardHeader({
                 <button
                   onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
                   disabled={editMode === 'delete'}
-                  className={`cursor-pointer transition-all rounded-lg${editMode === 'edit'
+                  className={`p-1 cursor-pointer transition-all rounded-lg${editMode === 'edit'
                     ? 'bg-blue-600'
                     : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
                       : ' hover:bg-blue-400 '
@@ -74,7 +74,7 @@ export function DashboardHeader({
                 <button
                   onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
                   disabled={editMode === 'edit'}
-                  className={`rounded-lg cursor-pointer transition-all group ${editMode === 'delete'
+                  className={`rounded-lg cursor-pointer transition-all group p-1 ${editMode === 'delete'
                     ? 'bg-red-600 border-red-600'
                     : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
                       : 'dark:border-white/50 hover:bg-red-200'
@@ -87,7 +87,7 @@ export function DashboardHeader({
                   />
                 </button>
 
-                <div className="flex items-center justify-center  h-6">
+                <div className="flex items-center p-1 justify-center h-6">
                   <AnimatePresence>
                     {showSearch && showSearchBar && (
                       <motion.div

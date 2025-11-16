@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, FileText, Loader2, CheckCircle2, ArrowLeft, Info } from 'lucide-react';
 import { parseBookmarksFile } from '@/utils/parseBookmarksFile';
 import { type Bookmark } from '@/types';
-import {StashLogo} from '@/icons/logo';
+import {BookmarkIcon, StashLogo} from '@/icons/logo';
 
 interface ImportPromptProps {
   onImportComplete: (bookmarks: Bookmark[]) => void;
@@ -53,43 +53,46 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
     <div className="min-h-screen">
       {/* Header */}
       <header className="">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <StashLogo className="w-8 h-8" />
+        <div className="mx-auto max-w-[1480px] px-2 py-4">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center ">
+              <StashLogo className="size-12" />
             </div>
-            <Button
-              variant="ghost"
-              onClick={onBack}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full text-xs"
-            >
-              <ArrowLeft className="size-3" />
-              Back
-            </Button>
+            <div className="flex flex-col items-end p-1">
+              <Button
+                variant="ghost"
+                onClick={onBack}
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full text-xs"
+              >
+                <ArrowLeft className="size-4" />
+                Back
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="text-center mb-12 space-y-1">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white ">
             Import Your Bookmarks
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="sm:text-sm text-xs text-gray-600 dark:text-gray-400">
             Bring your existing bookmarks from any browser
           </p>
         </div>
 
+
         {/* Upload Area */}
-        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 mb-8">
+        <div className=" flex justify-center mb-8">
           <div
             onClick={!isImporting ? handleUploadClick : undefined}
             className={`
-              relative border-2 border-dashed rounded-2xl p-16 text-center transition-all duration-300
+              relative border border-gray-100 border-dashed rounded-lg p-16 text-center transition-all duration-300 w-80 h-80 flex items-center justify-center
               ${isImporting || importSuccess 
                 ? 'border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/20' 
-                : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
+                : 'border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
               }
             `}
           >
@@ -104,7 +107,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
 
             {isImporting ? (
               <div className="space-y-4">
-                <Loader2 className="w-16 h-16 mx-auto text-blue-600 animate-spin" />
+                <Loader2 className="size-12 mx-auto text-blue-600 animate-spin" />
                 <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
                   Importing your bookmarks...
                 </p>
@@ -113,21 +116,20 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
               <div className="space-y-4">
                 <CheckCircle2 className="w-16 h-16 mx-auto text-green-600" />
                 <p className="text-lg font-medium text-green-700 dark:text-green-400">
-                  Import successful! Redirecting...
+                  Congrats! Redirecting...
                 </p>
               </div>
             ) : (
-              <div className="space-y-4">
-                <Upload className="w-16 h-16 mx-auto text-gray-400" />
+              <div className="flex flex-col items-center justify-center px-4 py-3 text-center">
+                <span className='rounded-full bg-gray-200 p-2'>
+                <BookmarkIcon className="size-4  mx-auto text-gray-400" />
+                </span>
                 <div>
-                  <p className="text-xl font-medium text-gray-900 dark:text-white mb-2">
-                    Drop your bookmarks file here
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    or click to browse files
+                  <p className="text-[12px] mt-2 font-medium sm:mb-1.5 sm:text-xs">
+                    Drag & Drop or Click to upload 
                   </p>
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500">
+                <p className="text-gray-500  text-[10px]">
                   Supports HTML bookmark exports from any browser
                 </p>
               </div>
@@ -136,7 +138,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
 
           {error && (
             <div className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
-              <p className="text-red-800 dark:text-red-400 text-center font-medium">
+              <p className="text-red-600 dark:text-red-400 text-center font-medium">
                 {error}
               </p>
             </div>
@@ -144,21 +146,20 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
         </div>
 
         {/* Instructions */}
-        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6 mb-8">
-          <div className="flex gap-3">
-            <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-medium text-blue-900 dark:text-blue-300 mb-2">
+                {/* Instructions */}
+        <div className=" flex justify-center mb-8 border py-5 border-dashed rounded-lg ">
+          <div className="flex gap-3 flex-col ">
+              <h3 className="font-medium text-gray-700 mb-2">
                 How to export bookmarks:
               </h3>
-              <ul className="text-sm text-blue-800 dark:text-blue-400 space-y-1">
+              <ul className="text-sm text-gray-500 space-y-1 ">
                 <li><strong>Chrome/Edge:</strong> Menu → Bookmarks → Bookmark Manager → ⋯ → Export</li>
                 <li><strong>Firefox:</strong> Menu → Bookmarks → Manage Bookmarks → Import & Backup → Export</li>
                 <li><strong>Safari:</strong> File → Export Bookmarks</li>
               </ul>
-            </div>
           </div>
         </div>
+
 
         {/* Skip Button */}
         <div className="text-center">
@@ -166,9 +167,9 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
             variant="outline"
             onClick={onSkip}
             disabled={isImporting}
-            className="px-8 rounded-full border-gray-300 dark:border-gray-700"
+            className=" border-none cursor-pointer  underline hover:text-black  transition-colors duration-300 dark:hover:text-white text-gray-600 dark:text-gray-400"
           >
-            Skip for now
+            Skip
           </Button>
         </div>
       </main>
