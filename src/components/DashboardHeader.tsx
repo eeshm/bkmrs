@@ -39,7 +39,7 @@ export function DashboardHeader({
 
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}
-            <div className="flex flex-row items-center gap-2 h-10 rounded-md">
+            <div className="flex flex-row items-center gap-2 h-9 rounded-md">
               {bookmarksCount > 0 && (
                 <div className="flex items-center h-full">
                   <AnimatePresence>
@@ -49,7 +49,7 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative h-full flex items-center overflow-hidden rounded-md  shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
+                        className="relative h-full flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
                       >
                         <input
                           type="text"
@@ -57,7 +57,7 @@ export function DashboardHeader({
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("pl-2  placeholder:text-gray-400 text-xs pr-2 bg-white border-0 h-full w-56",
+                          className={cn("p-4 placeholder:text-gray-600 font-sans pr-2 text-sm bg-white border-0 h-full w-56",
                             "focus-visible:outline-none focus-visible:ring-0"
                           )}
                         />

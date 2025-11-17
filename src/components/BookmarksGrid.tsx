@@ -23,7 +23,7 @@ export function BookmarksGrid({
     <>
       {/* Bookmarks Grid */}
       {bookmarks.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap space-x-2 space-y-2 justify-evenly px-4">
           {bookmarks.map((bookmark) => (
             <BookmarkCard
               key={bookmark.id}

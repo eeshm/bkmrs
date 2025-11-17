@@ -14,6 +14,11 @@ interface BookmarkCardProps {
 
 export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkCardProps) {
   const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
+  const [isInitialMount, setIsInitialMount] = useState(true);
+
+  React.useEffect(() => {
+    setIsInitialMount(false);
+  }, []);
 
   const getDomain = (url: string) => {
     try {
@@ -27,7 +32,8 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
     const rect = e.currentTarget.getBoundingClientRect();
     const midpoint = rect.width / 2;
     const mouseX = e.clientX - rect.left;
-    setHoverSide(mouseX < midpoint ? 'left' : 'right');
+    const side = mouseX < midpoint ? 'left' : 'right';
+    setHoverSide(side);
   };
 
   const handleMouseLeave = () => {
@@ -36,19 +42,20 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
 
   return (
     <motion.div
+      initial={{ y: 0, rotate: 0 }}
       transition={{
         ease: "easeInOut",
         duration: 0.15,
       }}
-      animate={!editMode && hoverSide ? {
+      animate={!editMode && hoverSide && !isInitialMount ? {
         y: -8,
         rotate: hoverSide === 'left' ? -1 : 1,
       } : { y: 0, rotate: 0 }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "group relative bg-white border w-auto h-9",
-        "flex items-center justify border-2 border-gray-200 rounded-md overflow-visible max-w-xs",
+        "group relative bg-white border w-full h-9",
+        "flex items-center justify border-4 border-gray-100 rounded-md overflow-visible max-w-xs",
         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
       )}
     >
