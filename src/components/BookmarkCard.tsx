@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ExternalLink, Trash2, Edit3 } from 'lucide-react';
 import { type Bookmark } from '@/types/index';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { TrashIcon123 } from '@/icons/logo';
 import { cn } from '@/lib/utils';
 
@@ -13,6 +13,8 @@ interface BookmarkCardProps {
 }
 
 export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkCardProps) {
+  const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
+
   const getDomain = (url: string) => {
     try {
       return new URL(url).hostname;
@@ -21,30 +23,35 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
     }
   };
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const midpoint = rect.width / 2;
+    const mouseX = e.clientX - rect.left;
+    setHoverSide(mouseX < midpoint ? 'left' : 'right');
+  };
+
+  const handleMouseLeave = () => {
+    setHoverSide(null);
+  };
+
   return (
-<motion.div
-  key={editMode}
-  initial={editMode ? { x: 0, y: 0 } : false}
-  animate={editMode
-    ? {
-        x: [0, 10, -10, 0], 
-        y: [0, -6, 6, 0], 
-      }
-    : { x: 0, y: 0 }
-  }
-  transition={{
-    ease: "easeInOut",
-    duration: 0.9,
-    repeatType: "loop", // Infinite loop on each direction change
-  }}
-  whileHover={!editMode ? { y: -8, rotate: 1 } : undefined}
-  className={cn(
-    "group relative bg-white border w-auto h-9",
-    "flex items-center justify border-gray-100 rounded-md overflow-hidden max-w-xs",
-    "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
-  )}
->
-      {/* Main content */}
+    <motion.div
+      transition={{
+        ease: "easeInOut",
+        duration: 0.1,
+      }}
+      animate={!editMode && hoverSide ? {
+        y: -8,
+        rotate: hoverSide === 'left' ? -1 : 1,
+      } : { y: 0, rotate: 0 }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={cn(
+        "group relative bg-white border w-auto h-9",
+        "flex items-center justify border-gray-100 rounded-md overflow-visible max-w-xs",
+        "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
+      )}
+    >
       <a
         href={bookmark.url}
         target="_blank"
@@ -71,27 +78,32 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
         </p>
       </a>
 
-      {/* Action buttons - Show only in edit/delete mode */}
-      {editMode && (
-        <div className="absolute top-1 right-1">
-          {editMode === 'edit' && onEdit && (
-            <button
-              onClick={() => onEdit(bookmark)}
-              className="flex-1 cursor-pointer text-black transition-colors "
-            >
-              <Edit3 className="size-3" />
-            </button>
-          )}
-          {editMode === 'delete' && onDelete && (
-            <button
-              onClick={() => onDelete(bookmark.id)}
-              className="flex- text-red-500  transition-colors cursor-pointer"
-            >
-              <TrashIcon123 className="size-4" />
-            </button>
-          )}
-        </div>
-      )}
+      <AnimatePresence>
+        {editMode === 'edit' && onEdit && (
+          <motion.button
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            onClick={() => onEdit(bookmark)}
+            className="absolute left-full ml-1 flex items-center justify-center cursor-pointer text-black hover:bg-blue-50 rounded p-1 transition-colors"
+          >
+            <Edit3 className="size-3.5" />
+          </motion.button>
+        )}
+        {editMode === 'delete' && onDelete && (
+          <motion.button
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            onClick={() => onDelete(bookmark.id)}
+            className="absolute left-full ml-1 flex items-center justify-center text-red-500 hover:bg-red-50 rounded p-1 transition-colors cursor-pointer"
+          >
+            <TrashIcon123 className="size-4" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
