@@ -85,12 +85,12 @@ export function DashboardHeader({
               {showImport && bookmarksCount === 0 && onImportClick && (
                 <Button
                   onClick={onImportClick}
-                  className="rounded-lg px-4 cursor-pointer underline"
+                  size="sm"
+                  className=" px-4 h-10 rounded-lg hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
                 >
                   Import
                 </Button>
               )}
-
               {bookmarksCount > 0 && (
                 <>
                   <button

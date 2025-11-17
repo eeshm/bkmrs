@@ -90,18 +90,19 @@ export function AddEditForm({
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1}}
             exit={{ opacity: 0 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
+            transition={{ duration: 0.3, ease: "easeOut" }}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: -500, x: 700, scale: 0.95 }}
+            initial={{ opacity: 0, y: -500 ,x:700,scale:0.5 }}
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -50, x: -100, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 ,duration: 0.6}}
+            exit={{ opacity: 0, y: 0, x: 0, scale: 0 }}
+            transition={{ ease: "easeOut", duration: 0.3 }}
             className="fixed top-25 sm:top-50 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex  justify-center"
           >
             <div className=" bg-white rounded-md border border-white/20 shadow-2xl w-[450px]">
@@ -109,7 +110,7 @@ export function AddEditForm({
               <div className="flex items-center border-b justify-between p-3 relative">
 
                 <div className='flex items-center gap-2'>
-                  <span className='bg-gray-200 rounded-md p-2'>
+                  <span className='bg-[#ededed] rounded-md p-2'>
                     <BookmarkIcon className="size-4" />
                   </span>
                   <div className=''>

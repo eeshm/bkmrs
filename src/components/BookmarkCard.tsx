@@ -4,6 +4,7 @@ import { type Bookmark } from '@/types/index';
 import { motion, AnimatePresence } from 'motion/react';
 import { TrashIcon123 } from '@/icons/logo';
 import { cn } from '@/lib/utils';
+import { TextScramble } from 'components/motion-primitives/text-scramble';
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -55,7 +56,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       onMouseLeave={handleMouseLeave}
       className={cn(
         "group relative bg-white border w-full h-9",
-        "flex items-center justify border-4 border-gray-100 rounded-md overflow-visible max-w-xs",
+        "flex items-center justify border-4 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
       )}
     >
@@ -77,11 +78,15 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             />
           )}
           <h3 className="font-medium text-xs text-gray-900 group-hover:text-blue-600 transition-colors truncate">
-            {bookmark.title}
+            <TextScramble
+              speed={0.05}>
+              {bookmark.title}
+            </TextScramble>
           </h3>
         </div>
-        <p className="text-[10px] text-gray-500 truncate shrink-0">
-          {getDomain(bookmark.url)}
+        <p className="text-[10px] text-gray-400 truncate shrink-0">
+
+            {getDomain(bookmark.url)}
         </p>
       </a>
 
