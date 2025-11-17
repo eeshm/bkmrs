@@ -136,7 +136,7 @@ export function Dashboard({
 
       {/* Main Content - Gray Rounded Section */}
       <main className="flex-1 overflow-hidden flex flex-col">
-        <div className="mx-auto max-w-[1500px] w-full h-full p-1 flex flex-col">
+        <div className="mx-auto max-w-[1500px] w-full h-full px-1 pb-1 flex flex-col">
           <div className="bg-gray-100 rounded-xl flex-1 py-4 px-2 overflow-auto border border-gray-200">
             {/* Empty State or Bookmarks Grid */}
             {bookmarks.length === 0 ? (

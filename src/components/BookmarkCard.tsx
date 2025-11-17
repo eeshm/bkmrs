@@ -38,7 +38,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
     <motion.div
       transition={{
         ease: "easeInOut",
-        duration: 0.1,
+        duration: 0.15,
       }}
       animate={!editMode && hoverSide ? {
         y: -8,
@@ -48,7 +48,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       onMouseLeave={handleMouseLeave}
       className={cn(
         "group relative bg-white border w-auto h-9",
-        "flex items-center justify border-gray-100 rounded-md overflow-visible max-w-xs",
+        "flex items-center justify border-2 border-gray-200 rounded-md overflow-visible max-w-xs",
         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
       )}
     >
@@ -56,7 +56,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center w-full gap-2 p-2 ${editMode ? 'pointer-events-none' : ''}`}
+        className={`flex items-center w-full gap-2 px-2  ${editMode ? 'pointer-events-none' : ''}`}
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {bookmark.favicon && (

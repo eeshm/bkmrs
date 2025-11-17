@@ -21,15 +21,6 @@ export function BookmarksGrid({
 }: BookmarksGridProps) {
   return (
     <>
-      {/* Search Results Info */}
-      {/* {searchQuery && (
-        <div className="mb-6">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {bookmarks.length} result{bookmarks.length !== 1 ? 's' : ''} for "{searchQuery}"
-          </p>
-        </div>
-      )} */}
-
       {/* Bookmarks Grid */}
       {bookmarks.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,11 +37,11 @@ export function BookmarksGrid({
       ) : searchQuery ? (
         <div className="text-center py-12">
           <p className="text-gray-500 dark:text-gray-400">
-            No bookmarks found matching "{searchQuery}"
+            Nothing found for "{searchQuery}"
           </p>
           <button
             onClick={onClearSearch}
-            className="text-blue-600 dark:text-blue-400 hover:underline mt-2"
+            className=" text-gray-600 dark:text-gray-400 transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
           >
             Clear search
           </button>

@@ -31,15 +31,15 @@ export function DashboardHeader({
   const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <header className="">
-      <div className="mx-auto max-w-[1500px] px-2 pt-4 h-full">
-        <div className="flex items-center justify-between h-full">
+      <div className="mx-auto max-w-[1500px] px-2 h-16">
+        <div className="flex items-center pt-2 justify-between h-full">
           <div className="flex">
             <StashLogo className="size-12" />
           </div>
 
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}
-            <div className="flex flex-row items-center gap-2 h-6">
+            <div className="flex flex-row items-center gap-2 h-10 rounded-md">
               {bookmarksCount > 0 && (
                 <div className="flex items-center h-full">
                   <AnimatePresence>
@@ -49,23 +49,22 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative overflow-hidden h-full flex items-center"
+                        className="relative h-full flex items-center overflow-hidden rounded-md  shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
                       >
-                        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 size-3 text-gray-400 pointer-events-none" />
                         <input
                           type="text"
                           placeholder="Search..."
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("pl-6 rounded-lg placeholder:text-gray-400 text-xs pr-2 bg-gray-100 dark:bg-gray-800 border-0 h-full w-56",
-                            "focus-visible:outline-none focus-visible:ring-0 border border-gray-300 dark:border-gray-700"
+                          className={cn("pl-2  placeholder:text-gray-400 text-xs pr-2 bg-white border-0 h-full w-56",
+                            "focus-visible:outline-none focus-visible:ring-0"
                           )}
                         />
                         {searchQuery && (
                           <button
                             onClick={() => onSearchChange('')}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                            className="absolute right-1 top-1/2 hover:bg-gray-200 p-2 rounded-md transition-colors duration-200 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                           >
                             <X className="size-3" />
                           </button>
