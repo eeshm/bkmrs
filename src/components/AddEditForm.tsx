@@ -103,9 +103,9 @@ export function AddEditForm({
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, y: 0, x: 0, scale: 0 }}
             transition={{ ease: "easeOut", duration: 0.3 }}
-            className="fixed top-25 sm:top-50 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex  justify-center"
+            className="fixed top-50 sm:top-25 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center"
           >
-            <div className=" bg-white rounded-md border border-white/20 shadow-2xl w-[450px]">
+            <div className=" bg-white rounded-md border border-white/20 shadow-2xl h-[300px] sm:h-auto w-[450px]">
 
               <div className="flex items-center border-b justify-between p-3 relative">
 
@@ -114,10 +114,10 @@ export function AddEditForm({
                     <BookmarkIcon className="size-4" />
                   </span>
                   <div className=''>
-                  <h3 className="text-xs font-semibold text-gray-900">
+                  <h3 className="text-xl sm:text-xs font-semibold text-gray-900">
                     {bookmark ? 'Edit Bookmark' : 'Add New Link'}
                   </h3>
-                  <p className='text-[10px] text-gray-400 dark:text-gray-600'>Add something new to your personal stash</p>
+                  <p className='text-base sm:text-xs   text-gray-400'>Add something to your personal stash</p>
                   </div>
                 </div>
                 <button
@@ -133,7 +133,7 @@ export function AddEditForm({
                   <div className='gap-1.5 mb-2'>
                     <ItemWithRef ref={urlInputRef} type="url" url={url} onChange={onUrlChange} placeholder="https://example.com" label="URL *" />
                   </div>
-                  <div className="flex  w-full gap-1.5 mb-2">
+                  <div className="flex w-full gap-1.5 mb-2">
                     <div className='w-1/2'>
                       <Item type="text" url={title} onChange={onTitleChange} placeholder="My Bookmark Title" label="Title" />
                     </div>
@@ -155,7 +155,7 @@ export function AddEditForm({
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-black dark:bg-black/70 text-xs text-white hover:bg-gray-800  w-[90px] rounded-lg"
+                    className="bg-black text-sm text-white hover:bg-gray-800 w-[90px] rounded-lg"
                   >
                     {bookmark ? 'Update' : 'Save'}
                   </Button>
@@ -175,7 +175,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
   function Item({ url, onChange, placeholder, label, type }, ref) {
     return <div>
       <div>
-        <label className="block text-[10px] font-medium  mb-1">
+        <label className="block text-sm sm:text-xs font-medium mb-1">
           {label}
         </label>
         <div className="flex gap-2">
@@ -186,7 +186,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             required={type === 'url'}
-            className="flex-1 rounded-lg placeholder:text-gray-500 h-8 text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
+            className="flex-1 rounded-lg  placeholder:text-gray-500  text-base sm:text-xs  border-gray-200 focus:ring-2 focus:ring-gray-400"
           />
         </div>
       </div>
@@ -196,8 +196,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return <div>
-    <div>
-      <label className="block text-[10px] font-medium  mb-1">
+      <label className="block text-sm sm:text-xs font-medium  mb-1">
         {label}
       </label>
       <div className="flex gap-2">
@@ -207,9 +206,8 @@ export function Item({ url, onChange, placeholder, label, type }: { url: string;
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           required={type === 'url'}
-          className="flex-1 rounded-lg placeholder:text-gray-500 h-8 text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
+          className="flex-1 rounded-lg placeholder:text-gray-500  text-base sm:text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
         />
       </div>
     </div>
-  </div>;
 }

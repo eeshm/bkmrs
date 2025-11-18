@@ -36,12 +36,12 @@ export function BookmarksGrid({
         </div>
       ) : searchQuery ? (
         <div className="text-center py-12">
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-gray-500 ">
             Nothing found for "{searchQuery}"
           </p>
           <button
             onClick={onClearSearch}
-            className=" text-gray-600 dark:text-gray-400 transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
+            className=" text-gray-600  transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
           >
             Clear search
           </button>

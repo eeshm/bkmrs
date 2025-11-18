@@ -34,7 +34,7 @@ export function DashboardHeader({
       <div className="mx-auto max-w-[1500px] px-2 h-16">
         <div className="flex items-center pt-2 justify-between h-full">
           <div className="flex">
-            <StashLogo className="size-12" />
+            <StashLogo className="size-14 sm:size-12" />
           </div>
 
           <div className="flex items-center justify-center h-full">
@@ -57,14 +57,14 @@ export function DashboardHeader({
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("p-4 placeholder:text-gray-600 font-sans pr-2 text-sm bg-white border-0 h-full w-56",
+                          className={cn("p-4 placeholder:text-gray-600 font-sans pr-2 text-base md:text-sm bg-white border-0 h-full w-56",
                             "focus-visible:outline-none focus-visible:ring-0"
                           )}
                         />
                         {searchQuery && (
                           <button
                             onClick={() => onSearchChange('')}
-                            className="absolute right-1 top-1/2 hover:bg-gray-200 p-2 rounded-md transition-colors duration-200 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                            className="absolute right-1 top-1/2 hover:bg-gray-200 p-2 rounded-md transition-colors duration-200 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                           >
                             <X className="size-3" />
                           </button>
@@ -77,7 +77,7 @@ export function DashboardHeader({
                     onClick={() => setShowSearchBar(!showSearchBar)}
                     className="cursor-pointer flex items-center justify-center p-1 h-full"
                   >
-                    <Search className="size-4 stroke-gray-600" />
+                    <Search className="size-6 sm:size-4  stroke-gray-600" />
                   </button>
                 </div>
               )}
@@ -86,7 +86,7 @@ export function DashboardHeader({
                 <Button
                   onClick={onImportClick}
                   size="sm"
-                  className=" px-4 h-10 rounded-lg hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
+                  className=" px-4 h-10 text-lg sm:text-xs rounded-lg hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
                 >
                   Import
                 </Button>
@@ -102,19 +102,21 @@ export function DashboardHeader({
                         : 'hover:bg-blue-400'
                       }`}
                   >
-                    <EditIcon className="size-3.5 stroke-gray-600" />
+                    {/* fix this */}
+                    <EditIcon className={`size-6 sm:size-4 stroke-gray-600
+                      
+                    `} />
                   </button>
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
                     disabled={editMode === 'edit'}
-                    className={`p-1 rounded-lg cursor-pointer transition-all ${editMode === 'delete'
-                      ? 'bg-red-600'
+                    className={`p-1 rounded-lg cursor-pointer transition-all ${editMode === 'delete' ? 'bg-red-600'
                       : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
                         : 'hover:bg-red-200'
                       }`}
                   >
                     <TrashIcon123
-                      className="size-4"
+                      className="size-6 sm:size-4"
                       fill={editMode === 'delete' ? 'white' : 'var(--color-red-600)'}
                       secondaryfill={editMode === 'delete' ? 'var(--color-gray-200)' : 'var(--color-red-700)'}
                     />
@@ -126,7 +128,7 @@ export function DashboardHeader({
                 onClick={onAddClick}
                 className="cursor-pointer transition-colors p-1"
               >
-                <PlusIcon className="size-4" />
+                <PlusIcon className="size-6 sm:size-4" />
               </button>
             </div>
           </div>

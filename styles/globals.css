@@ -72,6 +72,26 @@
     letter-spacing: -0.02em;
   }
 
+  /* Ensure minimum readable font sizes on mobile */
+  @media (max-width: 768px) {
+    html {
+      font-size: 16px; /* Prevent iOS zoom on input focus */
+    }
+    
+    input, textarea, select {
+      font-size: 16px !important; /* Prevent iOS zoom */
+    }
+    
+    /* Minimum readable sizes for very small text */
+    .text-\[10px\] {
+      font-size: 12px !important;
+    }
+    
+    .text-\[9px\] {
+      font-size: 11px !important;
+    }
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -121,21 +141,21 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
 
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
   
   @keyframes fadeIn {

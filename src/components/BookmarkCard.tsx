@@ -77,14 +77,14 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
               }}
             />
           )}
-          <h3 className="font-medium text-xs text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+          <h3 className="font-medium text-sm sm:text-xs text-gray-900 group-hover:text-blue-600 transition-colors truncate">
             <TextScramble
               speed={0.05}>
               {bookmark.title}
             </TextScramble>
           </h3>
         </div>
-        <p className="text-[10px] text-gray-400 truncate shrink-0">
+        <p className="text-xs sm:text-[10px] text-gray-400 truncate shrink-0">
 
             {getDomain(bookmark.url)}
         </p>
@@ -100,7 +100,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             onClick={() => onEdit(bookmark)}
             className="absolute left-full ml-1 flex items-center justify-center cursor-pointer text-black hover:bg-blue-50 rounded p-1 transition-colors"
           >
-            <Edit3 className="size-3.5" />
+            <Edit3 className="size-5 sm:size-3.5" />
           </motion.button>
         )}
         {editMode === 'delete' && onDelete && (
@@ -112,7 +112,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             onClick={() => onDelete(bookmark.id)}
             className="absolute left-full ml-1 flex items-center justify-center text-red-500 hover:bg-red-50 rounded p-1 transition-colors cursor-pointer"
           >
-            <TrashIcon123 className="size-4" />
+            <TrashIcon123 className="size-5 sm:size-4" />
           </motion.button>
         )}
       </AnimatePresence>

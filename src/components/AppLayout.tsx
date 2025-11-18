@@ -6,8 +6,8 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      <main className="w-full">
+    <div className="min-h-dvh bg-white">
+      <main className="w-full h-full">
         {children}
       </main>
     </div>
