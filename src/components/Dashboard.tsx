@@ -44,17 +44,17 @@ export function Dashboard({
     setEditingBookmark(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }) => {
     e.preventDefault();
     if (!url.trim()) return;
 
     const bookmarkData: Bookmark = {
       id: editingBookmark?.id || `bookmark_${Date.now()}`,
-      title: title.trim() || (await getPageTitle(url)) || new URL(url).hostname,
+      title: title.trim() || metadata?.title || (await getPageTitle(url)) || new URL(url).hostname,
       url: url.trim(),
       tags: tags.trim() ? tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
-      image: image || null,
-      favicon: favicon || null,
+      image: image || metadata?.image || null,
+      favicon: favicon || metadata?.favicon || null,
       createdAt: editingBookmark?.createdAt || new Date().toISOString(),
     };
 

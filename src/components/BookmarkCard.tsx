@@ -43,7 +43,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
 
   return (
     <motion.div
-      initial={{ y: 0, rotate: 0 }}
+      initial={{ y: 0, rotate: 0,left: 0 }}
       transition={{
         ease: "easeInOut",
         duration: 0.15,
@@ -56,7 +56,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       onMouseLeave={handleMouseLeave}
       className={cn(
         "group relative bg-white border w-full h-9",
-        "flex items-center justify border-4 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
+        "flex items-center justify border-3 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
         "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
       )}
     >
@@ -64,7 +64,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center w-full gap-2 px-2  ${editMode ? 'pointer-events-none' : ''}`}
+        className={`flex items-center w-full gap-4 px-2  ${editMode ? 'pointer-events-none' : ''}`}
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {bookmark.favicon && (
@@ -77,7 +77,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
               }}
             />
           )}
-          <h3 className="font-medium text-xs text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+          <h3 className="font-medium text-xs w- text-gray-900 group-hover:text-blue-600 transition-colors duration-300 truncate">
             <TextScramble
               speed={0.05}>
               {bookmark.title}
