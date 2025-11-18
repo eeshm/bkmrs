@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ExternalLink, Trash2, Edit3 } from 'lucide-react';
+import {Edit3 } from 'lucide-react';
 import { type Bookmark } from '@/types/index';
 import { motion, AnimatePresence } from 'motion/react';
 import { TrashIcon123 } from '@/icons/logo';
 import { cn } from '@/lib/utils';
-import { TextScramble } from 'components/motion-primitives/text-scramble';
+import { TextScramble } from '@/components/ui/text-scramble';
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
