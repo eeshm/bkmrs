@@ -173,7 +173,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
   function Item({ url, onChange, placeholder, label, type }, ref) {
     return <div>
       <div>
-        <label className="block text-[10px] font-medium  mb-1">
+        <label className="block text-lg sm:text-[10px] font-medium  mb-1">
           {label}
         </label>
         <div className="flex gap-2">
@@ -184,7 +184,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             required={type === 'url'}
-            className="flex-1 rounded-lg placeholder:text-gray-500 h-8 text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
+            className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
           />
         </div>
       </div>
@@ -194,7 +194,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return <div>
-    <label className="block text-[10px] font-medium  mb-1">
+    <label className="block text-lg sm:text-[10px] font-medium  mb-1">
       {label}
     </label>
     <div className="flex gap-2">
@@ -204,7 +204,7 @@ export function Item({ url, onChange, placeholder, label, type }: { url: string;
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={type === 'url'}
-        className="flex-1 rounded-lg placeholder:text-gray-500  text-sm sm:text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
+        className="flex-1 rounded-lg placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
       />
     </div>
   </div>

@@ -140,7 +140,7 @@ export function Dashboard({
           <div className="bg-white sm:rounded-xl flex-1 py-6 sm:py-4 px-3 sm:px-2 overflow-auto border-0 sm:border sm:border-gray-200 min-h-0">
             {/* Empty State or Bookmarks Grid */}
             {bookmarks.length === 0 ? (
-              <EmptyState onAddClick={handleAddNew} />
+              <EmptyState onAddClick={handleAddNew} onImportClick={onImport} />
             ) : (
               <BookmarksGrid
                 bookmarks={displayedBookmarks}

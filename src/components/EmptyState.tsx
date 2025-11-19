@@ -2,9 +2,10 @@ import { EmLogoIcon } from '@/icons/logo';
 import { BlurFade } from "@/components/ui/blur-fade";
 interface EmptyStateProps {
   onAddClick: () => void;
+  onImportClick?: () => void;
 }
 
-export function EmptyState({ onAddClick }: EmptyStateProps) {
+export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
     <div className="flex justify-center items-center h-full">
       <div className=" p-4 sm:p-3 max-w-lg mx-auto text-lg sm:text-[15px]  text-justify font-geist space-y-2 sm:space-y-1.5">
@@ -29,12 +30,25 @@ export function EmptyState({ onAddClick }: EmptyStateProps) {
         </p>
         </BlurFade>
         <BlurFade delay={0.5} >
-        <button
-          onClick={onAddClick}
-          className="cursor-pointer mt-6  text-gray-900  hover:text-gray-600  transition-colors duration-300 underline underline-offset-2"
-        >
-          Start Stashing 
-        </button>
+        <div className="flex items-center gap-2 mt-6">
+          <button
+            onClick={onAddClick}
+            className="cursor-pointer text-gray-900 hover:text-gray-600 transition-colors duration-300 underline underline-offset-2"
+          >
+            Start Stashing
+          </button>
+          {onImportClick && (
+            <>
+              <span className="text-gray-400">//</span>
+              <button
+                onClick={onImportClick}
+                className="cursor-pointer text-gray-900 hover:text-gray-600 transition-colors duration-300 underline underline-offset-2"
+              >
+                Import
+              </button>
+            </>
+          )}
+        </div>
         </BlurFade>        
         <BlurFade delay={0.6} >
         <p className="text-gray-400   text-sm sm:text-xs mt-8 pt-4 border-t border-gray-200  flex items-center justify-between">
