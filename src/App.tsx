@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <AppLayout>
+    <>
       {step === 'import' && (
         <ImportPrompt
           onImportComplete={handleImportComplete}
@@ -50,6 +50,6 @@ export default function App() {
           onImport={() => updateStep('import')}
         />
       )}
-    </AppLayout>
+    </>
   );
 }

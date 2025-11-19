@@ -82,21 +82,21 @@ export function AddEditForm({
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, y: 0, x: 0, scale: 0 }}
             transition={{ ease: "easeOut", duration: 0.3 }}
-            className="fixed top-50 sm:top-25 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center"
+            className="fixed top-50 sm:top-25 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center px-4 sm:px-0"
           >
-            <div className=" bg-white rounded-md border border-white/20 shadow-2xl h-[300px] sm:h-auto w-[450px]">
+            <div className=" bg-white rounded-md border border-white/20 shadow-2xl h-auto sm:h-auto w-full sm:w-[450px] max-w-[450px]">
 
-              <div className="flex items-center border-b justify-between p-3 relative">
+              <div className="flex items-center border-b justify-between p-3 sm:p-3 relative">
 
                 <div className='flex items-center gap-2'>
                   <span className='bg-[#ededed] rounded-md p-2'>
                     <BookmarkIcon className="size-4" />
                   </span>
                   <div className=''>
-                    <h3 className="text-xl sm:text-xs font-semibold text-gray-900">
+                    <h3 className="text-lg sm:text-xs font-semibold text-gray-900">
                       {bookmark ? 'Edit Bookmark' : 'Add New Link'}
                     </h3>
-                    <p className='text-base sm:text-xs   text-gray-400'>Add something to your personal stash</p>
+                    <p className='text-sm sm:text-xs   text-gray-400'>Add something to your personal stash</p>
                   </div>
                 </div>
                 <button
@@ -194,19 +194,18 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return <div>
-    <div>
-      <label className="block text-[10px] font-medium  mb-1">
-        {label}
-      </label>
-      <div className="flex gap-2">
-        <Input
-          type={type}
-          value={url}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          required={type === 'url'}
-          className="flex-1 rounded-lg placeholder:text-gray-500  text-base sm:text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
-        />
-      </div>
+    <label className="block text-[10px] font-medium  mb-1">
+      {label}
+    </label>
+    <div className="flex gap-2">
+      <Input
+        type={type}
+        value={url}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={type === 'url'}
+        className="flex-1 rounded-lg placeholder:text-gray-500  text-sm sm:text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
+      />
     </div>
+  </div>
 }

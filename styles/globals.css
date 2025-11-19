@@ -58,37 +58,18 @@
   }
   
   body {
-    background-color: hsl(var(--background));
+    background-color: hsl(var(--color-red-300));
     color: hsl(var(--foreground));
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
 
-  /* Ensure minimum readable font sizes on mobile */
+  /* Prevent iOS zoom on input focus */
   @media (max-width: 768px) {
-    html {
-      font-size: 16px; /* Prevent iOS zoom on input focus */
-    }
-    
     input, textarea, select {
-      font-size: 16px !important; /* Prevent iOS zoom */
-    }
-    
-    /* Minimum readable sizes for very small text */
-    .text-\[10px\] {
-      font-size: 12px !important;
-    }
-    
-    .text-\[9px\] {
-      font-size: 11px !important;
+      font-size: 16px !important;
     }
   }
 

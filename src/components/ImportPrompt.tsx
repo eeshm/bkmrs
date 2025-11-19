@@ -51,19 +51,19 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-[#ededed]">
+    <div className="min-h-screen h-screen flex flex-col overflow-hidden bg-white sm:bg-[#ededed]">
       {/* Header - White Background */}
-      <header className="">
-        <div className="mx-auto max-w-[1500px] px-1 sm:px-2 h-14 sm:h-16">
+      <header className="shrink-0">
+        <div className="mx-auto max-w-[1500px] px-4 sm:px-4 h-14 sm:h-16">
           <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
             <div className="flex">
-              <StashLogo className="size-10 sm:size-12" />
+            <StashLogo className="size-14 sm:size-12" />
             </div>
             <button
               onClick={onBack}
               className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full text-[10px] sm:text-xs flex items-center gap-1 hover:bg-gray-100 p-1 sm:p-2 transition-colors"
             >
-              <ArrowLeft className="size-3 sm:size-4" />
+              <ArrowLeft className="size-6 sm:size-4" />
               <span className="hidden sm:inline">Back</span>
             </button>
           </div>
@@ -71,20 +71,20 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
       </header>
 
       {/* Main Content - Gray Rounded Section */}
-      <main className="flex-1 overflow-hidden flex flex-col">
-        <div className="mx-auto max-w-[1500px] w-full h-full px-1 pb-1 flex flex-col">
-          <div className="bg-white rounded-xl flex-1 flex flex-col justify-center items-center py-4 px-2 overflow-auto border border-gray-200">
+      <main className="flex-1 overflow-hidden flex flex-col min-h-0 pb-0 sm:pb-1">
+        <div className="mx-auto max-w-[1500px] w-full h-full px-0 sm:px-1 flex flex-col min-h-0">
+          <div className="bg-white sm:rounded-xl flex-1 flex flex-col justify-center items-center py-6 sm:py-4 px-3 sm:px-2 overflow-auto border-0 sm:border sm:border-gray-200 min-h-0">
             <div className="text-center mb-3 sm:mb-6 space-y-0.5 sm:space-y-1 px-2">
-              <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-3xl sm:text-2xl font-bold text-gray-900 ">
                 Import Your Bookmarks
               </h2>
-              <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">
+              <p className="text-[16px] sm:text-xs text-gray-600 dark:text-gray-400">
                 Bring your existing bookmarks from any browser
               </p>
             </div>
 
             {/* Upload Area */}
-            <div className="flex justify-center mb-3 sm:mb-6">
+            <div className="flex flex-col items-center mb-3 sm:mb-6">
               <div
                 onClick={!isImporting ? handleUploadClick : undefined}
                 className={cn(
@@ -125,7 +125,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
                         Drag & Drop or Click to upload
                       </p>
                     </div>
-                    <p className="text-gray-500 text-[8px] sm:text-[9px]">
+                    <p className="text-gray-500 text-[12px] sm:text-[9px]">
                       Supports HTML bookmark exports
                     </p>
                   </div>
@@ -133,11 +133,9 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
               </div>
 
               {error && (
-                <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
-                  <p className="text-red-600 dark:text-red-400 text-center text-sm">
-                    {error}
-                  </p>
-                </div>
+                <p className="text-red-600 dark:text-red-400 text-xs sm:text-[10px] mt-2">
+                  {error}
+                </p>
               )}
             </div>
 
@@ -147,7 +145,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
                 <h3 className="font-medium text-gray-700 text-[10px] sm:text-xs">
                   How to export bookmarks:
                 </h3>
-                <ul className="text-[8px] sm:text-[10px] text-gray-500 space-y-0.5">
+                <ul className="text-[14px] sm:text-[10px] text-gray-500 space-y-0.5">
                   <li><strong>Chrome/Edge:</strong> Menu → Bookmarks → Bookmark Manager → ⋯ → Export</li>
                   <li><strong>Firefox:</strong> Menu → Bookmarks → Manage Bookmarks → Import & Backup → Export</li>
                   <li><strong>Safari:</strong> File → Export Bookmarks</li>
@@ -160,7 +158,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
               <button
                 onClick={onSkip}
                 disabled={isImporting}
-                className="border-none cursor-pointer underline hover:text-black transition-colors duration-300 dark:hover:text-white text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs"
+                className="border-none cursor-pointer underline hover:text-black transition-colors duration-300 dark:hover:text-white text-gray-600 dark:text-gray-400 text-[14px] sm:text-xs"
               >
                 Skip
               </button>

@@ -7,7 +7,7 @@ interface EmptyStateProps {
 export function EmptyState({ onAddClick }: EmptyStateProps) {
   return (
     <div className="flex justify-center items-center h-full">
-      <div className=" p-3 max-w-lg mx-auto text-[22px] sm:text-[15px]  text-justify font-geist space-y-1.5">
+      <div className=" p-4 sm:p-3 max-w-lg mx-auto text-lg sm:text-[15px]  text-justify font-geist space-y-2 sm:space-y-1.5">
         <BlurFade delay={0.2}>
         <h2 className="font-semibold ">
           Stash
@@ -33,11 +33,11 @@ export function EmptyState({ onAddClick }: EmptyStateProps) {
           onClick={onAddClick}
           className="cursor-pointer mt-6  text-gray-900  hover:text-gray-600  transition-colors duration-300 underline underline-offset-2"
         >
-          Start Stashing // Import
+          Start Stashing 
         </button>
         </BlurFade>        
         <BlurFade delay={0.6} >
-        <p className="text-gray-400   text-base sm:text-xs mt-8 pt-4 border-t border-gray-200  flex items-center justify-between">
+        <p className="text-gray-400   text-sm sm:text-xs mt-8 pt-4 border-t border-gray-200  flex items-center justify-between">
           <span>
             Inspired by{' '}
             <a 
