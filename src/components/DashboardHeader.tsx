@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { TrashIcon123, StashLogo, EditIcon, PlusIcon } from '@/icons/logo';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "motion/react";
+import { Input } from './ui/input';
 
 interface DashboardHeaderProps {
   bookmarksCount: number;
@@ -31,10 +32,10 @@ export function DashboardHeader({
   const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <header className="">
-      <div className="mx-auto max-w-[1500px] px-4 h-14 sm:h-16">
+      <div className="mx-auto max-w-[1500px] px-4 h-16 sm:h-16  border-b border-gray-400 border-dashed">
         <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
           <div className="flex">
-            <StashLogo className="size-14 sm:size-12" />
+            <StashLogo className="size-16 sm:size-12" />
           </div>
 
           <div className="flex items-center justify-center h-full">
@@ -51,15 +52,13 @@ export function DashboardHeader({
                         transition={{ duration: 0.5 }}
                         className="relative h-full flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
                       >
-                        <input
+                        <Input
                           type="text"
                           placeholder="Search..."
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className={cn("p-2 sm:p-4 placeholder:text-gray-600 font-sans pr-2 text-xs sm:text-sm bg-white border-0 h-full w-40 sm:w-56",
-                            "focus-visible:outline-none focus-visible:ring-0"
-                          )}
+                          className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
                         />
                         {searchQuery && (
                           <button
@@ -86,7 +85,7 @@ export function DashboardHeader({
                 <Button
                   onClick={onImportClick}
                   size="sm"
-                  className="px-2 sm:px-4 h-8 sm:h-10 rounded-lg text-sm sm:text-xs hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
+                  className="px-2 sm:px-4 h-8 sm:h-10 rounded-lg text-lg sm:text-xs hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
                 >
                   Import
                 </Button>

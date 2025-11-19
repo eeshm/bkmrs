@@ -8,7 +8,7 @@ interface EmptyStateProps {
 export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
     <div className="flex justify-center items-center h-full">
-      <div className=" p-4 sm:p-3 max-w-lg mx-auto text-lg sm:text-[15px]  text-justify font-geist space-y-2 sm:space-y-1.5">
+      <div className=" p-4 sm:p-3 max-w-lg mx-auto text-xl sm:text-[15px]  text-justify font-geist space-y-1 sm:space-y-1.5">
         <BlurFade delay={0.2}>
         <h2 className="font-semibold ">
           Stash
@@ -51,7 +51,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
         </div>
         </BlurFade>        
         <BlurFade delay={0.6} >
-        <p className="text-gray-400   text-sm sm:text-xs mt-8 pt-4 border-t border-gray-200  flex items-center justify-between">
+        <p className="text-gray-400   text-xs sm:text-xs mt-8 pt-4 border-t border-gray-200  flex items-center justify-between">
           <span>
             Inspired by{' '}
             <a 
@@ -69,7 +69,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
             rel="noopener noreferrer"
             className="hover:opacity-70 duration-300 transition-opacity cursor-pointer"
           >
-            <EmLogoIcon className='size-8 sm:size-6 stroke-gray-100 '/>
+            <EmLogoIcon className='size-6 sm:size-6 stroke-gray-100 '/>
           </a>
         </p>
         </BlurFade>
