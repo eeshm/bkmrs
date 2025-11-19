@@ -20,7 +20,7 @@ interface AddEditFormProps {
   onTagsChange: (value: string) => void;
   onImageChange: (value: string | null) => void;
   onFaviconChange: (value: string | null) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }) => void;
   onClose: () => void;
 }
 
@@ -54,34 +54,13 @@ export function AddEditForm({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
-  // Focus URL input when form opens
   useEffect(() => {
     if (isOpen && urlInputRef.current) {
       setTimeout(() => urlInputRef.current?.focus(), 100);
     }
   }, [isOpen]);
 
-  // Extract metadata when URL changes
-  useEffect(() => {
-    if (!isOpen || !url.trim() || url === bookmark?.url) return;
 
-    const extractMetadata = async () => {
-      setIsLoading(true);
-      try {
-        const metadata = await extractPageMetadata(url);
-        if (!title) onTitleChange(metadata.title);
-        if (!image) onImageChange(metadata.image);
-        onFaviconChange(metadata.favicon);
-      } catch (error) {
-        console.error('Failed to extract metadata:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    const debounce = setTimeout(extractMetadata, 800);
-    return () => clearTimeout(debounce);
-  }, [url, isOpen, title, image, onTitleChange, onImageChange, onFaviconChange, bookmark?.url]);
 
   return (
     <AnimatePresence>
@@ -90,7 +69,7 @@ export function AddEditForm({
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1}}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
@@ -99,7 +78,7 @@ export function AddEditForm({
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: -500 ,x:700,scale:0.5 }}
+            initial={{ opacity: 0, y: -500, x: 700, scale: 0.5 }}
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, y: 0, x: 0, scale: 0 }}
             transition={{ ease: "easeOut", duration: 0.3 }}
@@ -114,10 +93,10 @@ export function AddEditForm({
                     <BookmarkIcon className="size-4" />
                   </span>
                   <div className=''>
-                  <h3 className="text-xl sm:text-xs font-semibold text-gray-900">
-                    {bookmark ? 'Edit Bookmark' : 'Add New Link'}
-                  </h3>
-                  <p className='text-base sm:text-xs   text-gray-400'>Add something to your personal stash</p>
+                    <h3 className="text-xl sm:text-xs font-semibold text-gray-900">
+                      {bookmark ? 'Edit Bookmark' : 'Add New Link'}
+                    </h3>
+                    <p className='text-base sm:text-xs   text-gray-400'>Add something to your personal stash</p>
                   </div>
                 </div>
                 <button
@@ -128,17 +107,35 @@ export function AddEditForm({
                 </button>
               </div>
 
-              <form onSubmit={onSubmit}>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                if (!url.trim()) return;
+
+                let metadata = { title: '', image: null as string | null, favicon: null as string | null };
+                if (!title || !image) {
+                  setIsLoading(true);
+                  try {
+                    metadata = await extractPageMetadata(url);
+                  } catch (error) {
+                    console.error('Failed to extract metadata:', error);
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }
+
+                // Submit with metadata
+                onSubmit(e, metadata);
+              }}>
                 <div className='p-3 gap-4'>
                   <div className='gap-1.5 mb-2'>
-                    <ItemWithRef ref={urlInputRef} type="url" url={url} onChange={onUrlChange} placeholder="https://example.com" label="URL *" />
+                    <ItemWithRef ref={urlInputRef} type="url" url={url} onChange={onUrlChange} placeholder="link url" label="url*" />
                   </div>
                   <div className="flex w-full gap-1.5 mb-2">
                     <div className='w-1/2'>
-                      <Item type="text" url={title} onChange={onTitleChange} placeholder="My Bookmark Title" label="Title" />
+                      <Item type="text" url={title} onChange={onTitleChange} placeholder="title (optional)" label="title" />
                     </div>
                     <div className='w-1/2'>
-                      <Item type="text" url={tags} onChange={onTagsChange} placeholder="tag1, tag2" label="Tags (comma separated)" />
+                      <Item type="text" url={tags} onChange={onTagsChange} placeholder="tag1, tag2" label="tags" />
                     </div>
                   </div>
                 </div>
@@ -155,9 +152,10 @@ export function AddEditForm({
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-black text-sm text-white hover:bg-gray-800 w-[90px] rounded-lg"
+                    disabled={isLoading}
+                    className="bg-black dark:bg-black/70 text-xs text-white hover:bg-gray-800 disabled:opacity-50 w-[90px] rounded-lg"
                   >
-                    {bookmark ? 'Update' : 'Save'}
+                    {isLoading ? <Loader2 className="size-3 animate-spin" /> : (bookmark ? 'Update' : 'Save')}
                   </Button>
 
                 </div>
@@ -175,7 +173,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
   function Item({ url, onChange, placeholder, label, type }, ref) {
     return <div>
       <div>
-        <label className="block text-sm sm:text-xs font-medium mb-1">
+        <label className="block text-[10px] font-medium  mb-1">
           {label}
         </label>
         <div className="flex gap-2">
@@ -186,7 +184,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             required={type === 'url'}
-            className="flex-1 rounded-lg  placeholder:text-gray-500  text-base sm:text-xs  border-gray-200 focus:ring-2 focus:ring-gray-400"
+            className="flex-1 rounded-lg placeholder:text-gray-500 h-8 text-xs border-gray-200 focus:ring-2 focus:ring-gray-400"
           />
         </div>
       </div>
@@ -196,7 +194,8 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return <div>
-      <label className="block text-sm sm:text-xs font-medium  mb-1">
+    <div>
+      <label className="block text-[10px] font-medium  mb-1">
         {label}
       </label>
       <div className="flex gap-2">

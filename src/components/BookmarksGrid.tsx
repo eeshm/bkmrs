@@ -41,7 +41,7 @@ export function BookmarksGrid({
           </p>
           <button
             onClick={onClearSearch}
-            className=" text-gray-600  transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
+            className=" text-gray-600 text-xs dark:text-gray-400 transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
           >
             Clear search
           </button>
