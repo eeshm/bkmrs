@@ -101,7 +101,7 @@ export function DashboardHeader({
                         : 'hover:bg-blue-400'
                       }`}
                   >
-                    <EditIcon className="size-5 sm:size-4 stroke-gray-600" />
+                    <EditIcon className="size-5 sm:size-4" />
                   </button>
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
@@ -125,7 +125,7 @@ export function DashboardHeader({
                 onClick={onAddClick}
                 className="cursor-pointer transition-colors p-1"
               >
-                <PlusIcon className="size-5 sm:size-4" />
+                <PlusIcon className="size-5 sm:size-4 " />
               </button>
             </div>
           </div>

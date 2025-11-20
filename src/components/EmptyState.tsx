@@ -33,16 +33,16 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
         <div className="flex items-center gap-2 mt-6">
           <button
             onClick={onAddClick}
-            className="cursor-pointer sm:text-[#edecec] sm:hover:text-gray-100 transition-colors duration-300 underline underline-offset-4"
+            className="cursor-pointer sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
           >
             Start Stashing
           </button>
           {onImportClick && (
             <>
-              <span className="text-gray-400">\\</span>
+              <span className="text-gray-400">/</span>
               <button
                 onClick={onImportClick}
-                className="cursor-pointer sm:text-[#edecec] sm:hover:text-gray-100 transition-colors duration-300 underline underline-offset-4"
+                className="cursor-pointer sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
               >
                 Import
               </button>

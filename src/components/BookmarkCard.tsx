@@ -55,7 +55,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "group relative bg-white border w-full h-9",
+        "group relative bg-white border w-full h-10",
         "flex items-center justify border-3 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
         "sm:bg-[#edecec]/10 sm:border-black/50 sm:border",
       )}
