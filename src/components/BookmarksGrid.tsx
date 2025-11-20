@@ -23,7 +23,7 @@ export function BookmarksGrid({
     <>
       {/* Bookmarks Grid */}
       {bookmarks.length > 0 ? (
-        <div className="flex flex-wrap space-x-2 space-y-2 justify-evenly px-4">
+        <div className="flex flex-wrap space-x-2 space-y-2 justify-evenly py-4">
           {bookmarks.map((bookmark) => (
             <BookmarkCard
               key={bookmark.id}
@@ -35,13 +35,13 @@ export function BookmarksGrid({
           ))}
         </div>
       ) : searchQuery ? (
-        <div className="text-center py-12">
-          <p className="text-gray-500 ">
+        <div className="text-center py-20">
+          <p className="text-gray-500 sm:text-[#edecec]/40 font-mono text-sm">
             Nothing found for "{searchQuery}"
           </p>
           <button
             onClick={onClearSearch}
-            className=" text-gray-600 text-xs dark:text-gray-400 transition-all duration-400 underline underline-offset-2 hover:text-black hover:cursor-pointer mt-2"
+            className="mt-4 text-xs text-gray-400 hover:text-gray-900 sm:text-[#edecec]/30 sm:hover:text-[#edecec] transition-colors underline underline-offset-4"
           >
             Clear search
           </button>

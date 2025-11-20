@@ -5,6 +5,7 @@ import { TrashIcon123, StashLogo, EditIcon, PlusIcon } from '@/icons/logo';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "motion/react";
 import { Input } from './ui/input';
+import { KeyboardShortcuts } from './KeyboardShortcuts';
 
 interface DashboardHeaderProps {
   bookmarksCount: number;
@@ -16,6 +17,8 @@ interface DashboardHeaderProps {
   showImport?: boolean;
   editMode?: 'edit' | 'delete' | null;
   onEditModeChange?: (mode: 'edit' | 'delete' | null) => void;
+  isSearchOpen: boolean;
+  onSearchOpenChange: (isOpen: boolean) => void;
 }
 
 export function DashboardHeader({
@@ -28,15 +31,16 @@ export function DashboardHeader({
   showImport = false,
   editMode,
   onEditModeChange,
+  isSearchOpen,
+  onSearchOpenChange,
 }: DashboardHeaderProps) {
-  const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <header>
-      <div className="mx-auto  px-4 py-2 sm:border-0 border-b border-gray-400 border-dashed">
+      <div className="mx-auto px-4 py-2 sm:border-0 border-b border-gray-200 sm:border-[#edecec]/10 border-dashed">
         <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
           <div className="flex">
             <StashLogo className="size-16 sm:size-12" />
-          </div> 
+          </div>
 
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}
@@ -44,7 +48,7 @@ export function DashboardHeader({
               {bookmarksCount > 0 && (
                 <div className="flex items-center h-full">
                   <AnimatePresence>
-                    {showSearch && showSearchBar && (
+                    {showSearch && isSearchOpen && (
                       <motion.div
                         initial={{ opacity: 0, width: 0 }}
                         animate={{ opacity: 1, width: 'auto' }}
@@ -73,8 +77,8 @@ export function DashboardHeader({
                   </AnimatePresence>
 
                   <button
-                    onClick={() => setShowSearchBar(!showSearchBar)}
-                    className="cursor-pointer flex items-center justify-center p-1 h-full"
+                    onClick={() => onSearchOpenChange(!isSearchOpen)}
+                    className="cursor-pointer flex items-center justify-center p-1"
                   >
                     <Search className="size-5 sm:size-4 stroke-gray-600" />
                   </button>
@@ -85,7 +89,8 @@ export function DashboardHeader({
                 <Button
                   onClick={onImportClick}
                   size="sm"
-                  className="px-2 sm:px-4 h-8 sm:h-10 rounded-lg text-lg sm:text-xs hover:bg-gray-300/50 underline text-gray-600 cursor-pointer"
+                  variant="ghost"
+                  className="px-2  rounded-lg text-base sm:text-sm font-medium text-gray-900  hover:bg-transparent hover:opacity-70 transition-all duration-300 underline underline-offset-4 cursor-pointer"
                 >
                   Import
                 </Button>
@@ -95,22 +100,24 @@ export function DashboardHeader({
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
                     disabled={editMode === 'delete'}
-                    className={`p-1 cursor-pointer transition-all rounded-lg ${editMode === 'edit'
+                    className={`p-1 flex items-center justify-center cursor-pointer transition-all rounded-lg ${editMode === 'edit'
                       ? 'bg-blue-600'
                       : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
                         : 'hover:bg-blue-400'
-                      }`}
+                        }`}
+                        title="Edit Mode (E)"
                   >
                     <EditIcon className="size-5 sm:size-4" />
                   </button>
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
                     disabled={editMode === 'edit'}
-                    className={`p-1 cursor-pointer transition-all rounded-lg ${editMode === 'delete'
+                    className={`p-1  flex items-center justify-center cursor-pointer transition-all rounded-lg ${editMode === 'delete'
                       ? 'bg-red-600'
                       : editMode === 'edit' ? 'opacity-50 cursor-not-allowed'
                         : 'hover:bg-red-200'
                       }`}
+                    title="Delete Mode (D)"
                   >
                     <TrashIcon123
                       className="size-5 sm:size-4"
@@ -123,10 +130,15 @@ export function DashboardHeader({
 
               <button
                 onClick={onAddClick}
-                className="cursor-pointer transition-colors p-1"
+                className="cursor-pointer flex items-center justify-center transition-colors p-1"
+                title="Add New (A)"
               >
                 <PlusIcon className="size-5 sm:size-4 " />
               </button>
+
+              <div className="hidden sm:block">
+                <KeyboardShortcuts />
+              </div>
             </div>
           </div>
         </div>

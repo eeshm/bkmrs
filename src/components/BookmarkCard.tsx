@@ -49,43 +49,47 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
         duration: 0.15,
       }}
       animate={!editMode && hoverSide && !isInitialMount ? {
-        y: -8,
-        rotate: hoverSide === 'left' ? -1 : 1,
+        y: -4,
+        rotate: hoverSide === 'left' ? -0.5 : 0.5,
       } : { y: 0, rotate: 0 }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "group relative bg-white border w-full h-10",
-        "flex items-center justify border-3 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
-        "sm:bg-[#edecec]/10 sm:border-black/50 sm:border",
+        "group relative w-full h-10",
+        "flex items-center justify-between rounded-lg overflow-visible max-w-[250px] md:max-w-xs transition-colors duration-200",
+        "bg-white border border-gray-200 hover:border-gray-300",
+        "sm:bg-[#edecec]/10 sm:border-[#edecec]/10 sm:hover:border-[#edecec]/20",
       )}
     >
       <a
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center w-full gap-4 px-2  ${editMode ? 'pointer-events-none' : ''}`}
+        className={`flex items-center w-full gap-3 px-3 ${editMode ? 'pointer-events-none opacity-50' : ''}`}
       >
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          {bookmark.favicon && (
+        <div className="flex items-center gap-2.5 flex-1 min-w-0">
+          {bookmark.favicon ? (
             <img
               src={bookmark.favicon}
               alt=""
-              className="w-5 h-5 rounded shrink-0"
+              className="size-4 rounded-sm shrink-0"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
+          ) : (
+            <div className="size-4 rounded-sm shrink-0 bg-gray-100 sm:bg-[#edecec]/10" />
           )}
-          <h3 className="font-medium text-xs w- text-gray-900 sm:text-[#edecec]  transition-colors duration-300 truncate">
+          <h3 className="font-medium text-sm text-gray-900 sm:text-[#edecec] truncate leading-none pt-0.5">
             <TextScramble
-              speed={0.05}>
+              speed={0.05}
+              className="group-hover:text-black sm:group-hover:text-white transition-colors"
+            >
               {bookmark.title}
             </TextScramble>
           </h3>
         </div>
-        <p className="text-xs sm:text-[10px] text-gray-400 sm:text-[#edecec]/60 truncate shrink-0">
-
+        <p className="text-[10px] text-gray-400 sm:text-[#edecec]/40 truncate shrink-0 font-mono transition-opacity duration-300">
           {getDomain(bookmark.url)}
         </p>
       </a>
@@ -93,26 +97,26 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       <AnimatePresence>
         {editMode === 'edit' && onEdit && (
           <motion.button
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0, scale: 0.8, x: -10 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: -10 }}
+            transition={{ duration: 0.2 }}
             onClick={() => onEdit(bookmark)}
-            className="absolute left-full ml-1 flex items-center justify-center cursor-pointer sm:text-[#edecec]/60 sm:hover:text-black text-black hover:bg-blue-50 rounded p-1 transition-colors"
+            className="absolute -right-7 flex items-center justify-center cursor-pointer text-gray-400 hover:text-blue-600 sm:text-[#edecec]/40 sm:hover:text-blue-400 p-1.5 transition-colors"
           >
-            <Edit3 className="size-5 sm:size-3.5" />
+            <Edit3 className="size-4" />
           </motion.button>
         )}
         {editMode === 'delete' && onDelete && (
           <motion.button
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0, scale: 0.8, x: -10 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: -10 }}
+            transition={{ duration: 0.2 }}
             onClick={() => onDelete(bookmark.id)}
-            className="absolute left-full ml-1 flex items-center justify-center text-red-500 hover:bg-red-50 rounded p-1 transition-colors cursor-pointer"
+            className="absolute -right-7 flex items-center justify-center cursor-pointer text-gray-400 hover:text-red-600 sm:text-[#edecec]/40 sm:hover:text-red-400 p-1.5 transition-colors"
           >
-            <TrashIcon123 className="size-5 sm:size-4" />
+            <TrashIcon123 className="size-4" />
           </motion.button>
         )}
       </AnimatePresence>
