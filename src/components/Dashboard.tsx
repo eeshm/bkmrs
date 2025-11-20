@@ -111,14 +111,15 @@ export function Dashboard({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [editMode, isSearchOpen, searchQuery, showAddForm]);
 
-  const handleSubmit = async (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }) => {
+  const handleSubmit = async (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }, normalizedUrl?: string) => {
     e.preventDefault();
-    if (!url.trim()) return;
+    const finalUrl = normalizedUrl || url.trim();
+    if (!finalUrl) return;
 
     const bookmarkData: Bookmark = {
       id: editingBookmark?.id || `bookmark_${Date.now()}`,
-      title: title.trim() || metadata?.title || (await getPageTitle(url)) || new URL(url).hostname,
-      url: url.trim(),
+      title: title.trim() || metadata?.title || (await getPageTitle(finalUrl)) || new URL(finalUrl).hostname,
+      url: finalUrl,
       tags: tags.trim() ? tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
       image: image || metadata?.image || null,
       favicon: favicon || metadata?.favicon || null,

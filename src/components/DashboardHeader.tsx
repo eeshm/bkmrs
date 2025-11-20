@@ -41,7 +41,7 @@ export function DashboardHeader({
           <div className="flex">
             <StashLogo className="size-16 sm:size-12" />
           </div>
-
+ 
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}
             <div className="flex flex-row items-center gap-2  h-8 sm:h-9 rounded-md">

@@ -20,7 +20,7 @@ interface AddEditFormProps {
   onTagsChange: (value: string) => void;
   onImageChange: (value: string | null) => void;
   onFaviconChange: (value: string | null) => void;
-  onSubmit: (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }) => void;
+  onSubmit: (e: React.FormEvent, metadata?: { title: string; image: string | null; favicon: string | null }, normalizedUrl?: string) => void;
   onClose: () => void;
 }
 
@@ -41,6 +41,7 @@ export function AddEditForm({
   onClose,
 }: AddEditFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const urlInputRef = React.useRef<HTMLInputElement>(null);
 
   // Close on Escape key
@@ -60,7 +61,18 @@ export function AddEditForm({
     }
   }, [isOpen]);
 
-
+  const normalizeUrl = (inputUrl: string) => {
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return trimmed;
+    // Check if it has a protocol
+    if (!/^https?:\/\//i.test(trimmed)) {
+      // If it has a dot and text after it, assume it's a domain and prepend https://
+      if (trimmed.includes('.') && !trimmed.endsWith('.')) {
+        return `https://${trimmed}`;
+      }
+    }
+    return trimmed;
+  };
 
   return (
     <AnimatePresence>
@@ -114,24 +126,59 @@ export function AddEditForm({
 
               <form onSubmit={async (e) => {
                 e.preventDefault();
-                if (!url.trim()) return;
+                if (!url.trim()) {
+                  setError('Please enter a URL');
+                  return;
+                }
+                
+                const finalUrl = normalizeUrl(url);
+                
+                // Ensure URL is valid (must have protocol or have been normalized to have one)
+                if (!/^https?:\/\//i.test(finalUrl) || finalUrl.endsWith('.')) {
+                  setError('Please enter a valid URL');
+                  return;
+                }
+
+                if (finalUrl !== url) {
+                  onUrlChange(finalUrl);
+                }
+
                 let metadata = { title: '', image: null as string | null, favicon: null as string | null };
                 if (!title || !image) {
                   setIsLoading(true);
                   try {
-                    metadata = await extractPageMetadata(url);
+                    metadata = await extractPageMetadata(finalUrl);
                   } catch (error) {
                     console.error('Failed to extract metadata:', error);
                   } finally {
                     setIsLoading(false);
                   }
                 }
-                // Submit with metadata
-                onSubmit(e, metadata);
+                // Submit with metadata and normalized URL
+                onSubmit(e, metadata, finalUrl);
               }}>
                 <div className='p-4 space-y-4'>
-                  <div className='space-y-1.5'>
-                    <ItemWithRef ref={urlInputRef} type="url" url={url} onChange={onUrlChange} placeholder="https://..." label="URL" />
+                  <div className='space-y-1.5 relative'>
+                    {error && (
+                      <motion.span 
+                        initial={{ opacity: 0, y: 2 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute right-0 top-0 text-[10px] text-red-500 font-mono"
+                      >
+                        {error}
+                      </motion.span>
+                    )}
+                    <ItemWithRef 
+                      ref={urlInputRef} 
+                      type="text" 
+                      url={url} 
+                      onChange={(val) => {
+                        if (error) setError(null);
+                        onUrlChange(val);
+                      }} 
+                      placeholder="https://..." 
+                      label="URL" 
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className='space-y-1.5'>
