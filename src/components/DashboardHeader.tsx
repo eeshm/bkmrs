@@ -31,8 +31,8 @@ export function DashboardHeader({
 }: DashboardHeaderProps) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   return (
-    <header className="">
-      <div className="mx-auto max-w-[1500px] px-4 h-16 sm:h-16  border-b border-gray-400 border-dashed">
+    <header>
+      <div className="mx-auto  px-4 h-16 sm:h-16 sm:border-0 border-b border-gray-400 border-dashed">
         <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
           <div className="flex">
             <StashLogo className="size-16 sm:size-12" />
@@ -50,7 +50,7 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative h-full flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
+                        className="relative h-full flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
                       >
                         <Input
                           type="text"
@@ -58,7 +58,7 @@ export function DashboardHeader({
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
+                          className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-0 focus:ring-gray-400"
                         />
                         {searchQuery && (
                           <button

@@ -84,33 +84,31 @@ export function AddEditForm({
             transition={{ ease: "easeOut", duration: 0.3 }}
             className="fixed top-50 sm:top-25 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center px-4 sm:px-0"
           >
-            <div className=" bg-white rounded-md border border-white/20 shadow-2xl h-auto sm:h-auto w-full sm:w-[450px] max-w-[450px]">
-
-              <div className="flex items-center border-b justify-between p-3 sm:p-3 relative">
+            <div className=" bg-white sm:bg-[#0b0b0b] rounded-md border border-white/10 shadow-2xl h-auto sm:h-auto w-full sm:w-[450px] max-w-[450px]">
+              <div className="flex items-center border-b  sm:border-[#edecec]/10 justify-between p-3 sm:p-3 relative">
 
                 <div className='flex items-center gap-2'>
                   <span className='bg-[#ededed] rounded-md p-2'>
                     <BookmarkIcon className="size-4" />
                   </span>
                   <div className=''>
-                    <h3 className="text-lg sm:text-xs font-semibold text-gray-900">
+                    <h3 className="text-lg sm:text-xs font-semibold text-gray-900 sm:text-[#edecec]">
                       {bookmark ? 'Edit Bookmark' : 'Add New Link'}
                     </h3>
-                    <p className='text-sm sm:text-xs   text-gray-400'>Add something to your personal stash</p>
+                    <p className='text-sm sm:text-xs text-gray-400 sm:text-[#edecec]/60'>Add something to your personal stash</p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
                   className=" data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-3 right-3 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5"
                 >
-                  <X className="size-3" />
+                  <X className="size-3 sm:stroke-[#edecec]" />
                 </button>
               </div>
 
               <form onSubmit={async (e) => {
                 e.preventDefault();
                 if (!url.trim()) return;
-
                 let metadata = { title: '', image: null as string | null, favicon: null as string | null };
                 if (!title || !image) {
                   setIsLoading(true);
@@ -122,7 +120,6 @@ export function AddEditForm({
                     setIsLoading(false);
                   }
                 }
-
                 // Submit with metadata
                 onSubmit(e, metadata);
               }}>
@@ -139,7 +136,7 @@ export function AddEditForm({
                     </div>
                   </div>
                 </div>
-                <div className='border-b ' />
+                <div className='border-b sm:border-[#edecec]/10' />
 
                 <div className="flex space-x-2 justify-end p-3">
                   <Button
@@ -173,7 +170,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
   function Item({ url, onChange, placeholder, label, type }, ref) {
     return <div>
       <div>
-        <label className="block text-lg sm:text-[10px] font-medium  mb-1">
+        <label className="block text-lg sm:text-[10px] font-medium  sm:text-[#edecec] mb-1">
           {label}
         </label>
         <div className="flex gap-2">
@@ -184,7 +181,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             required={type === 'url'}
-            className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
+            className="flex-1 rounded-lg  placeholder:text-gray-500 text-base sm:text-white sm:border-white/10  border-gray-200 focus:ring-[1px] focus:ring-gray-400"
           />
         </div>
       </div>
@@ -194,7 +191,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return <div>
-    <label className="block text-lg sm:text-[10px] font-medium  mb-1">
+    <label className="block text-lg sm:text-[10px] sm:text-[#edecec]/60 font-medium  mb-1">
       {label}
     </label>
     <div className="flex gap-2">
@@ -204,7 +201,7 @@ export function Item({ url, onChange, placeholder, label, type }: { url: string;
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={type === 'url'}
-        className="flex-1 rounded-lg placeholder:text-gray-500 text-base border-gray-200 focus:ring-2 focus:ring-gray-400"
+        className="flex-1 rounded-lg placeholder:text-gray-500 text-base sm:text-white border-gray-200  focus:outline-hidden sm:border-white/20 focus:ring-[1px] focus:ring-gray-400"
       />
     </div>
   </div>

@@ -43,7 +43,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
 
   return (
     <motion.div
-      initial={{ y: 0, rotate: 0, left: 0 }}
+      initial={{ y: 0, rotate: 0, left: 0 ,x:0}}
       transition={{
         ease: "easeInOut",
         duration: 0.15,

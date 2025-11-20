@@ -4,6 +4,7 @@ import { DashboardHeader } from '@/components/DashboardHeader';
 import { AddEditForm } from '@/components/AddEditForm';
 import { EmptyState } from '@/components/EmptyState';
 import { BookmarksGrid } from '@/components/BookmarksGrid';
+import { AppLayout, Main } from './AppLayout';
 
 interface DashboardProps {
   bookmarks: Bookmark[];
@@ -100,8 +101,7 @@ export function Dashboard({
   };
 
   return (
-    <div className="min-h-screen h-screen bg-white sm:bg-[#ededed] flex flex-col overflow-hidden">
-      {/* Header - White Background */}
+    <AppLayout>
       <div className="shrink-0">
         <DashboardHeader
           bookmarksCount={bookmarks.length}
@@ -134,26 +134,21 @@ export function Dashboard({
         onClose={resetForm}
       />
 
-      {/* Main Content - Gray Rounded Section */}
-      <main className="flex-1 overflow-hidden flex flex-col min-h-0 pb-0 sm:pb-1">
-        <div className="mx-auto max-w-[1500px] w-full h-full px-0 sm:px-1 flex flex-col min-h-0">
-          <div className="bg-white sm:rounded-xl flex-1 py-6 sm:py-4 px-3 sm:px-2 overflow-auto border-0 sm:border sm:border-gray-200 min-h-0">
-            {/* Empty State or Bookmarks Grid */}
-            {bookmarks.length === 0 ? (
-              <EmptyState onAddClick={handleAddNew} onImportClick={onImport} />
-            ) : (
-              <BookmarksGrid
-                bookmarks={displayedBookmarks}
-                searchQuery={searchQuery}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                onClearSearch={() => setSearchQuery('')}
-                editMode={editMode}
-              />
-            )}
-          </div>
-        </div>
-      </main>
-    </div>
+      <Main>
+        {/* Empty State or Bookmarks Grid */}
+        {bookmarks.length === 0 ? (
+          <EmptyState onAddClick={handleAddNew} onImportClick={onImport} />
+        ) : (
+          <BookmarksGrid
+            bookmarks={displayedBookmarks}
+            searchQuery={searchQuery}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onClearSearch={() => setSearchQuery('')}
+            editMode={editMode}
+          />
+        )}
+      </Main>
+    </AppLayout>
   );
 }
