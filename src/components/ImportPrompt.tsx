@@ -53,8 +53,8 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
 
   return (
     <AppLayout>
-      <header className="shrink-0">
-        <div className=" px-4 sm:px-4 h-14 sm:h-16">
+      <header className="shrink-0 sm:border-0 border-b border-gray-400 border-dashed">
+        <div className=" px-4 py-2 ">
           <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
             <div className="flex">
               <StashLogo className="size-16 sm:size-12" />

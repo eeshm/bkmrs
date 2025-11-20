@@ -67,9 +67,9 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
             href="https://eeshm.me" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="hover:opacity-70 duration-300 transition-opacity cursor-pointer"
+            className="cursor-pointer"
           >
-            <EmLogoIcon className='size-6 sm:size-6 fill-black sm:fill-[#edecec]/60 '/>
+            <EmLogoIcon className='duration-300 transition-colors size-6 sm:size-6 fill-black sm:fill-[#edecec]/60 sm:hover:fill-white'/>
           </a>
         </p>
         </BlurFade>

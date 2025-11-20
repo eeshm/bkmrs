@@ -32,11 +32,11 @@ export function DashboardHeader({
   const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <header>
-      <div className="mx-auto  px-4 h-16 sm:h-16 sm:border-0 border-b border-gray-400 border-dashed">
+      <div className="mx-auto  px-4 py-2 sm:border-0 border-b border-gray-400 border-dashed">
         <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
           <div className="flex">
             <StashLogo className="size-16 sm:size-12" />
-          </div>
+          </div> 
 
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}

@@ -78,10 +78,15 @@ export function AddEditForm({
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: -500, x: 700, scale: 0.5 }}
-            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 0, x: 0, scale: 0 }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+              mass: 0.8
+            }}
             className="fixed top-50 sm:top-25 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center px-4 sm:px-0"
           >
             <div className=" bg-white sm:bg-[#0b0b0b] rounded-md border border-white/10 shadow-2xl h-auto sm:h-auto w-full sm:w-[450px] max-w-[450px]">
@@ -143,14 +148,14 @@ export function AddEditForm({
                     type="button"
                     variant="outline"
                     onClick={onClose}
-                    className="rounded-lg border-gray-300 w-[90px]"
+                    className="rounded-lg border-gray-300 w-[90px] bor"
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="bg-black dark:bg-black/70 text-xs text-white hover:bg-gray-800 disabled:opacity-50 w-[90px] rounded-lg"
+                    className="bg-black  text-xs text-white border border-white/10 cursor-pointer disabled:opacity-50 w-[90px] rounded-lg"
                   >
                     {isLoading ? <Loader2 className="size-3 animate-spin" /> : (bookmark ? 'Update' : 'Save')}
                   </Button>
@@ -201,7 +206,7 @@ export function Item({ url, onChange, placeholder, label, type }: { url: string;
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={type === 'url'}
-        className="flex-1 rounded-lg placeholder:text-gray-500 text-base sm:text-white border-gray-200  focus:outline-hidden sm:border-white/20 focus:ring-[1px] focus:ring-gray-400"
+        className="flex-1 rounded-lg focus:outline-none focus:ring-0 placeholder:text-gray-500 text-base sm:text-white border-gray-200  focus:outline-hidden sm:border-white/20  focus:ring-gray-400"
       />
     </div>
   </div>

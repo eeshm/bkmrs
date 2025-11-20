@@ -57,7 +57,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       className={cn(
         "group relative bg-white border w-full h-9",
         "flex items-center justify border-3 border-gray-100 rounded-md overflow-visible  max-w-[250px] md:max-w-xs",
-        "shadow-[0_1px_5px_rgb(0,0,0,0.2)]"
+        "sm:bg-[#edecec]/10 sm:border-black/50 sm:border",
       )}
     >
       <a
@@ -77,14 +77,14 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
               }}
             />
           )}
-          <h3 className="font-medium text-xs w- text-gray-900 group-hover:text-blue-600 transition-colors duration-300 truncate">
+          <h3 className="font-medium text-xs w- text-gray-900 sm:text-[#edecec]  transition-colors duration-300 truncate">
             <TextScramble
               speed={0.05}>
               {bookmark.title}
             </TextScramble>
           </h3>
         </div>
-        <p className="text-xs sm:text-[10px] text-gray-400 truncate shrink-0">
+        <p className="text-xs sm:text-[10px] text-gray-400 sm:text-[#edecec]/60 truncate shrink-0">
 
           {getDomain(bookmark.url)}
         </p>
@@ -98,7 +98,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             exit={{ opacity: 0, x: -10 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             onClick={() => onEdit(bookmark)}
-            className="absolute left-full ml-1 flex items-center justify-center cursor-pointer text-black hover:bg-blue-50 rounded p-1 transition-colors"
+            className="absolute left-full ml-1 flex items-center justify-center cursor-pointer sm:text-[#edecec]/60 sm:hover:text-black text-black hover:bg-blue-50 rounded p-1 transition-colors"
           >
             <Edit3 className="size-5 sm:size-3.5" />
           </motion.button>
