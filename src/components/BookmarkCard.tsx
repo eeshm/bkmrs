@@ -65,7 +65,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
         href={bookmark.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center w-full gap-3 px-3 ${editMode ? 'pointer-events-none opacity-50' : ''}`}
+        className={`flex items-center w-full gap-3 px-3 ${editMode ? 'pointer-events-none opacity-50 ' : ''}`}
       >
         <div className="flex items-center gap-2.5 flex-1 min-w-0">
           {bookmark.favicon ? (
@@ -102,7 +102,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             exit={{ opacity: 0, scale: 0.8, x: -10 }}
             transition={{ duration: 0.2 }}
             onClick={() => onEdit(bookmark)}
-            className="absolute -right-6 flex items-center justify-center cursor-pointer rounded-md hover:text-white hover:bg-blue-600 sm:text-[#edecec]/40 sm:hover:text-blue-400 p-1.5 transition-colors"
+            className="absolute -right-6.5 flex items-center justify-center cursor-pointer rounded-md hover:text-white hover:bg-blue-600 text-blue-500  sm:hover:text-white p-1.5 transition-colors"
           >
             <Edit3 className="size-3" />
           </motion.button>
@@ -114,7 +114,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             exit={{ opacity: 0, scale: 0.8, x: -10 }}
             transition={{ duration: 0.2 }}
             onClick={() => onDelete(bookmark.id)}
-            className="absolute -right-6 flex items-center justify-center cursor-pointer rounded-md hover:text-white text-red-600 hover:bg-red-600 sm:text-[#edecec]/40 sm:hover:text-red-400 p-1.5 transition-colors"
+            className="absolute -right-6.5 flex items-center justify-center cursor-pointer rounded-md hover:text-white text-red-600 hover:bg-red-600  sm:hover:text-white p-1.5 transition-colors"
           >
             <TrashIcon123 className="size-3" />
           </motion.button>

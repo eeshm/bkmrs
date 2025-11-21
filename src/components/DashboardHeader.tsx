@@ -101,11 +101,11 @@ export function DashboardHeader({
                     onClick={() => onEditModeChange?.(editMode === 'edit' ? null : 'edit')}
                     disabled={editMode === 'delete'}
                     className={`p-1 flex items-center justify-center cursor-pointer transition-all rounded-lg ${editMode === 'edit'
-                      ? 'bg-blue-600'
+                      ? 'bg-blue-600 stroke-white fill-white'
                       : editMode === 'delete' ? 'opacity-50 cursor-not-allowed'
                         : 'hover:bg-blue-400'
                         }`}
-                        title="Edit Mode (E)"
+                      title="Edit Mode (E)"
                   >
                     <EditIcon className="size-3 sm:size-4" />
                   </button>

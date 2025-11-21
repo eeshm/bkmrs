@@ -8,9 +8,9 @@ interface EmptyStateProps {
 export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
     <div className="flex justify-center items-center pt-10 sm:pt-20">
-      <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px] text-left font-sans leading-relaxed space-y-2">
+      <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px]/6 text-left font-sans font-BOLD space-y-1">
         <BlurFade delay={0.2}>
-          <h2 className="font-medium  sm:text-[#edecec] tracking-tight">
+          <h2 className=" sm:text-[#edecec] tracking-tight">
             Stash
           </h2>
         </BlurFade>
@@ -20,7 +20,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
           </p>
         </BlurFade>
         <BlurFade delay={0.3}>
-          <h2 className="font-medium mt-8  tracking-wider sm:text-[#edecec]">
+          <h2 className="mt-6  tracking-wider sm:text-[#edecec]">
             About
           </h2>
         </BlurFade>
@@ -33,7 +33,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
           <div className="flex items-center gap-3 mt-8">
             <button
               onClick={onAddClick}
-              className="cursor-pointer font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
+              className="cursor-pointer sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
             >
               Start Stashing
             </button>
@@ -42,7 +42,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
                 <span className="text-gray-300 sm:text-[#edecec]/20">/</span>
                 <button
                   onClick={onImportClick}
-                  className="cursor-pointer  font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
+                  className="cursor-pointer  sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
                 >
                   Import
                 </button>
