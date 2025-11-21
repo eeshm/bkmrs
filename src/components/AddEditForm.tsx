@@ -31,12 +31,9 @@ export function AddEditForm({
   title,
   tags,
   image,
-  favicon,
   onUrlChange,
   onTitleChange,
   onTagsChange,
-  onImageChange,
-  onFaviconChange,
   onSubmit,
   onClose,
 }: AddEditFormProps) {
@@ -102,7 +99,7 @@ export function AddEditForm({
             className="fixed top-20 sm:top-32 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 flex justify-center px-4 sm:px-0"
           >
             <div className="bg-white sm:bg-[#0a0a0a] rounded-xl border border-gray-200 sm:border-[#edecec]/10 shadow-2xl w-full sm:w-[450px] overflow-hidden">
-              <div className="flex items-center border-b border-gray-100 sm:border-[#edecec]/10 justify-between p-4 relative bg-gray-50/50 sm:bg-transparent">
+              <div className="flex items-center border-b border-gray-200 sm:border-[#edecec]/10 justify-between p-4 relative bg-gray-50/50 sm:bg-transparent">
                 <div className='flex items-center gap-3'>
                   <div className='bg-white sm:bg-[#edecec]/10 border border-gray-200 sm:border-transparent rounded-lg p-2'>
                     <BookmarkIcon className="size-4 text-black sm:text-[#edecec]" />
@@ -195,14 +192,14 @@ export function AddEditForm({
                     type="button"
                     variant="ghost"
                     onClick={onClose}
-                    className="h-8 text-xs text-gray-500 hover:text-gray-900 sm:text-[#edecec]/40 sm:hover:text-[#edecec] hover:bg-gray-100 sm:hover:bg-[#edecec]/5"
+                    className="h-8 text-[10px] text-gray-500 hover:text-gray-900 sm:text-[#edecec]/40 sm:hover:text-[#edecec] hover:bg-gray-100 sm:hover:bg-[#edecec]/5"
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="h-8 text-xs bg-black text-white hover:bg-gray-800 sm:bg-[#edecec] sm:text-black sm:hover:bg-[#edecec]/90 border border-transparent sm:border-[#edecec]/10 min-w-20"
+                    className="h-8 text-[10px] bg-black text-white hover:bg-gray-800 sm:bg-[#edecec] sm:text-black sm:hover:bg-[#edecec]/90 border border-transparent sm:border-[#edecec]/10 min-w-20"
                   >
                     {isLoading ? <Loader2 className="size-3 animate-spin" /> : (bookmark ? 'Save Changes' : 'Add Bookmark')}
                   </Button>
@@ -221,7 +218,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
   function Item({ url, onChange, placeholder, label, type }, ref) {
     return (
       <div>
-        <label className="block text-xs sm:text-[10px] font-mono text-gray-500 sm:text-[#edecec]/40 mb-1.5 uppercase tracking-wider">
+        <label className="block text-[10px] font-mono text-gray-500 sm:text-[#edecec]/40 mb-1.5 uppercase tracking-wider">
           {label}
         </label>
         <Input
@@ -231,7 +228,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           required={type === 'url'}
-          className="h-9 bg-transparent border-gray-200 sm:border-[#edecec]/10 text-gray-900 sm:text-[#edecec] placeholder:text-gray-400 sm:placeholder:text-[#edecec]/20 focus-visible:ring-0 focus-visible:border-gray-400 sm:focus-visible:border-[#edecec]/30 transition-colors"
+          className="h-9 bg-transparent text-base border-gray-200 sm:border-[#edecec]/10 text-gray-900 sm:text-[#edecec] placeholder:text-gray-400 sm:placeholder:text-[#edecec]/20 focus-visible:ring-0 focus-visible:border-gray-400 sm:focus-visible:border-[#edecec]/30 transition-colors"
         />
       </div>
     );
@@ -241,7 +238,7 @@ export const ItemWithRef = React.forwardRef<HTMLInputElement, { url: string; onC
 export function Item({ url, onChange, placeholder, label, type }: { url: string; onChange: (value: string) => void, placeholder: string, label: string, type: string }) {
   return (
     <div>
-      <label className="block text-xs sm:text-[10px] font-mono text-gray-500 sm:text-[#edecec]/40 mb-1.5 uppercase tracking-wider">
+      <label className="block text-[10px] font-mono text-gray-500 sm:text-[#edecec]/40 mb-1.5 uppercase tracking-wider">
         {label}
       </label>
       <Input
@@ -250,7 +247,7 @@ export function Item({ url, onChange, placeholder, label, type }: { url: string;
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={type === 'url'}
-        className="h-9 bg-transparent border-gray-200 sm:border-[#edecec]/10 text-gray-900 sm:text-[#edecec] placeholder:text-gray-400 sm:placeholder:text-[#edecec]/20 focus-visible:ring-0 focus-visible:border-gray-400 sm:focus-visible:border-[#edecec]/30 transition-colors"
+        className="h-9 bg-transparent text-base border-gray-200 sm:border-[#edecec]/10 text-gray-900 sm:text-[#edecec] placeholder:text-gray-400 sm:placeholder:text-[#edecec]/20 focus-visible:ring-0 focus-visible:border-gray-400 sm:focus-visible:border-[#edecec]/30 transition-colors"
       />
     </div>
   );

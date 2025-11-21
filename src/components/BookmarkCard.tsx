@@ -55,8 +55,8 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "group relative w-full h-10",
-        "flex items-center justify-between rounded-lg overflow-visible max-w-[250px] md:max-w-xs transition-colors duration-200",
+        "group relative w-full h-8 sm:h-10",
+        "flex items-center justify-between rounded-lg overflow-visible max-w-[250px] sm:max-w-xs transition-colors duration-200",
         "bg-white border border-gray-200 hover:border-gray-300",
         "sm:bg-[#edecec]/10 sm:border-[#edecec]/10 sm:hover:border-[#edecec]/20",
       )}
@@ -72,7 +72,7 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             <img
               src={bookmark.favicon}
               alt=""
-              className="size-4 rounded-sm shrink-0"
+              className="sm:size-4 size-3 rounded-sm shrink-0"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
@@ -80,16 +80,16 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
           ) : (
             <div className="size-4 rounded-sm shrink-0 bg-gray-100 sm:bg-[#edecec]/10" />
           )}
-          <h3 className="font-medium text-sm text-gray-900 sm:text-[#edecec] truncate leading-none pt-0.5">
+          <h3 className="font-medium sm:text-sm text-xs text-gray-900 sm:text-[#edecec] truncate leading-none pt-0.5">
             <TextScramble
               speed={0.05}
-              className="group-hover:text-black sm:group-hover:text-white transition-colors"
+              className="group-hover:text-black  sm:group-hover:text-white transition-colors"
             >
               {bookmark.title}
             </TextScramble>
           </h3>
         </div>
-        <p className="text-[10px] text-gray-400 sm:text-[#edecec]/40 truncate shrink-0 font-mono transition-opacity duration-300">
+        <p className=" text-[8px] sm:text-[10px] text-gray-400 sm:text-[#edecec]/40 truncate shrink-0 font-mono transition-opacity duration-300">
           {getDomain(bookmark.url)}
         </p>
       </a>
@@ -102,9 +102,9 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             exit={{ opacity: 0, scale: 0.8, x: -10 }}
             transition={{ duration: 0.2 }}
             onClick={() => onEdit(bookmark)}
-            className="absolute -right-8 flex items-center justify-center cursor-pointer rounded-md hover:text-white hover:bg-blue-600 sm:text-[#edecec]/40 sm:hover:text-blue-400 p-1.5 transition-colors"
+            className="absolute -right-6 flex items-center justify-center cursor-pointer rounded-md hover:text-white hover:bg-blue-600 sm:text-[#edecec]/40 sm:hover:text-blue-400 p-1.5 transition-colors"
           >
-            <Edit3 className="size-4" />
+            <Edit3 className="size-3" />
           </motion.button>
         )}
         {editMode === 'delete' && onDelete && (
@@ -114,9 +114,9 @@ export function BookmarkCard({ bookmark, onDelete, onEdit, editMode }: BookmarkC
             exit={{ opacity: 0, scale: 0.8, x: -10 }}
             transition={{ duration: 0.2 }}
             onClick={() => onDelete(bookmark.id)}
-            className="absolute -right-8 flex items-center justify-center cursor-pointer rounded-md hover:text-white text-red-600 hover:bg-red-600 sm:text-[#edecec]/40 sm:hover:text-red-400 p-1.5 transition-colors"
+            className="absolute -right-6 flex items-center justify-center cursor-pointer rounded-md hover:text-white text-red-600 hover:bg-red-600 sm:text-[#edecec]/40 sm:hover:text-red-400 p-1.5 transition-colors"
           >
-            <TrashIcon123 className="size-4" />
+            <TrashIcon123 className="size-3" />
           </motion.button>
         )}
       </AnimatePresence>

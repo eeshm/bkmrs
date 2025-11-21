@@ -7,8 +7,8 @@ interface EmptyStateProps {
 
 export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
-    <div className="flex justify-center items-center pt-20">
-      <div className="p-4 sm:p-3 max-w-lg mx-auto text-lg sm:text-[15px] text-left font-sans leading-relaxed space-y-2">
+    <div className="flex justify-center items-center pt:10 sm:pt-20">
+      <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px] text-left font-sans leading-relaxed space-y-2">
         <BlurFade delay={0.2}>
           <h2 className="font-medium  sm:text-[#edecec] tracking-tight">
             Stash
@@ -33,7 +33,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
           <div className="flex items-center gap-3 mt-8">
             <button
               onClick={onAddClick}
-              className="cursor-pointer text-base sm:text-sm font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
+              className="cursor-pointer font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
             >
               Start Stashing
             </button>
@@ -42,7 +42,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
                 <span className="text-gray-300 sm:text-[#edecec]/20">/</span>
                 <button
                   onClick={onImportClick}
-                  className="cursor-pointer text-base sm:text-sm font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
+                  className="cursor-pointer  font-medium sm:text-[#edecec] sm:hover:opacity-80 transition-all duration-300 underline underline-offset-4"
                 >
                   Import
                 </button>
@@ -51,7 +51,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
           </div>
         </BlurFade>
         <BlurFade delay={0.6}>
-          <p className="sm:text-[#edecec]/60 text-xs sm:text-xs mt-8 pt-4 border-t border-gray-200 flex items-center justify-between">
+          <p className="sm:text-[#edecec]/60 text-[10px] mt-8 pt-4 border-t border-gray-200 flex items-center justify-between">
             <span>
               Inspired by{' '}
               <a 
@@ -69,7 +69,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
               rel="noopener noreferrer"
               className="cursor-pointer"
             >
-              <EmLogoIcon className='duration-300 transition-colors size-6 sm:size-6 fill-black sm:fill-[#edecec]/60 sm:hover:fill-white'/>
+              <EmLogoIcon className='duration-300 transition-colors size-4 sm:size-6 fill-black sm:fill-[#edecec]/60 sm:hover:fill-white'/>
             </a>
           </p>
         </BlurFade>

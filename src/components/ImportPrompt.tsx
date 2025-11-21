@@ -53,16 +53,16 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
   return (
     <AppLayout>
     <header>
-      <div className="mx-auto px-4 py-2 sm:border-0 border-b border-gray-200 sm:border-[#edecec]/10 border-dashed">
-        <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
+      <div className="mx-auto px-4 py-1 sm:border-0 border-b border-gray-200 border-dashed sm:h-full h-14 ">
+        <div className="flex items-center pt-1  justify-between h-full">
           <div className="flex">
-              <StashLogo className="size-16 sm:size-12" />
+              <StashLogo className="size-12" />
             </div>
             <button
               onClick={onBack}
               className="text-gray-500 sm:text-black hover:text-gray-900 sm:hover:text-black/70 rounded-full text-sm sm:text-xs flex items-center gap-1 p-2 transition-colors"
             >
-              <ArrowLeft className="size-5 sm:size-4" />
+              <ArrowLeft className="size-4" />
               <span className="hidden sm:inline">Back</span>
             </button>
           </div>
@@ -76,7 +76,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
           <h2 className="text-2xl font-medium tracking-tight text-gray-900 sm:text-[#edecec]">
             Import Your Bookmarks
           </h2>
-          <p className="text-base text-gray-500 sm:text-[#edecec]/60">
+          <p className="text-[10px] text-gray-500 sm:text-[#edecec]/60">
             Bring your existing bookmarks from any browser
           </p>
         </div>
@@ -123,7 +123,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
                   <p className="text-sm font-medium text-gray-900 sm:text-[#edecec]">
                     Click to upload
                   </p>
-                  <p className="text-xs text-gray-500 sm:text-[#edecec]/40">
+                  <p className="text-[10px] text-gray-500 sm:text-[#edecec]/40">
                     Supports HTML bookmark exports
                   </p>
                 </div>
@@ -144,7 +144,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
             <h3 className="font-medium text-gray-900 sm:text-[#edecec] text-xs uppercase tracking-wider mb-2">
               How to export bookmarks
             </h3>
-            <ul className="text-xs text-gray-500 sm:text-[#edecec]/60 space-y-1.5 leading-relaxed">
+            <ul className="text-[10px] text-gray-500 sm:text-[#edecec]/60 space-y-1.5 leading-relaxed">
               <li><strong className="font-medium text-gray-700 sm:text-[#edecec]/80">Chrome/Edge:</strong> Menu → Bookmarks → Manager → Export</li>
               <li><strong className="font-medium text-gray-700 sm:text-[#edecec]/80">Firefox:</strong> Menu → Bookmarks → Manage → Import & Backup → Export</li>
               <li><strong className="font-medium text-gray-700 sm:text-[#edecec]/80">Safari:</strong> File → Export Bookmarks</li>
@@ -157,7 +157,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
           <button
             onClick={onSkip}
             disabled={isImporting}
-            className="text-sm text-gray-500 sm:text-[#edecec]/40 hover:text-gray-900 sm:hover:text-[#edecec] transition-colors underline underline-offset-4"
+            className="text-[10px] text-gray-500 sm:text-[#edecec]/40 hover:text-gray-900 sm:hover:text-[#edecec] transition-colors underline underline-offset-4"
           >
             Skip for now
           </button>

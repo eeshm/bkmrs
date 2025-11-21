@@ -36,15 +36,15 @@ export function DashboardHeader({
 }: DashboardHeaderProps) {
   return (
     <header>
-      <div className="mx-auto px-4 py-2 sm:border-0 border-b border-gray-200 sm:border-[#edecec]/10 border-dashed">
-        <div className="flex items-center pt-1 sm:pt-2 justify-between h-full">
+      <div className="mx-auto px-4 py-1 sm:border-0 border-b border-gray-200 border-dashed sm:h-full h-14 ">
+        <div className="flex items-center pt-1  justify-between h-full">
           <div className="flex">
-            <StashLogo className="size-16 sm:size-12" />
+            <StashLogo className="size-12" />
           </div>
  
           <div className="flex items-center justify-center h-full">
             {/* Top row: All action buttons in one line */}
-            <div className="flex flex-row items-center gap-2  h-8 sm:h-9 rounded-md">
+            <div className="flex flex-row items-center gap-2  h-9 rounded-md">
               {bookmarksCount > 0 && (
                 <div className="flex items-center h-full">
                   <AnimatePresence>
@@ -69,7 +69,7 @@ export function DashboardHeader({
                             onClick={() => onSearchChange('')}
                             className="absolute right-0.5 sm:right-1 top-1/2 hover:bg-gray-200 p-1 sm:p-2 rounded-md transition-colors duration-200 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                           >
-                            <X className="size-2 sm:size-3 " />
+                            <X className="size-3 " />
                           </button>
                         )}
                       </motion.div>
@@ -80,7 +80,7 @@ export function DashboardHeader({
                     onClick={() => onSearchOpenChange(!isSearchOpen)}
                     className="cursor-pointer flex items-center justify-center p-1"
                   >
-                    <Search className="size-5 sm:size-4 stroke-gray-600" />
+                    <Search className="size-4 stroke-gray-600" />
                   </button>
                 </div>
               )}
@@ -90,7 +90,7 @@ export function DashboardHeader({
                   onClick={onImportClick}
                   size="sm"
                   variant="ghost"
-                  className="px-2  rounded-lg text-base sm:text-sm font-medium text-gray-900  hover:bg-transparent hover:opacity-70 transition-all duration-300 underline underline-offset-4 cursor-pointer"
+                  className="px-2  rounded-lg text-sm font-medium text-gray-900  hover:bg-transparent hover:opacity-70 transition-all duration-300 underline underline-offset-4 cursor-pointer"
                 >
                   Import
                 </Button>
@@ -107,7 +107,7 @@ export function DashboardHeader({
                         }`}
                         title="Edit Mode (E)"
                   >
-                    <EditIcon className="size-5 sm:size-4" />
+                    <EditIcon className="size-4" />
                   </button>
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
@@ -120,7 +120,7 @@ export function DashboardHeader({
                     title="Delete Mode (D)"
                   >
                     <TrashIcon123
-                      className="size-5 sm:size-4"
+                      className="size-4"
                       fill={editMode === 'delete' ? 'white' : 'var(--color-red-600)'}
                       secondaryfill={editMode === 'delete' ? 'var(--color-gray-200)' : 'var(--color-red-700)'}
                     />
@@ -133,7 +133,7 @@ export function DashboardHeader({
                 className="cursor-pointer flex items-center justify-center transition-colors p-1"
                 title="Add New (A)"
               >
-                <PlusIcon className="size-5 sm:size-4 " />
+                <PlusIcon className="size-4 " />
               </button>
 
               <div className="hidden sm:block">
