@@ -8,7 +8,7 @@ interface EmptyStateProps {
 export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
     <div className="flex justify-center items-center pt-10 sm:pt-20">
-      <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px]/6 text-left font-sans font-BOLD space-y-1">
+      <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px]/6 text-left font-sans  space-y-0">
         <BlurFade delay={0.2}>
           <h2 className=" sm:text-[#edecec] tracking-tight">
             Stash
@@ -20,7 +20,7 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
           </p>
         </BlurFade>
         <BlurFade delay={0.3}>
-          <h2 className="mt-6  tracking-wider sm:text-[#edecec]">
+          <h2 className="mt-5  tracking-wider sm:text-[#edecec]">
             About
           </h2>
         </BlurFade>
@@ -29,7 +29,17 @@ export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
             Created for personal needs and refined to personal sensibilities. Intentionally minimal, almost austere. It recognizes input types, enriches links with metadata, and keeps the experience firmly keyboard-first. Animations are discreet; performance, swift — or so it claims. No onboarding, no tracking, and never any ads.
           </p>
         </BlurFade>
+        <BlurFade delay={0.45}>
+          <h2 className="mt-5 tracking-wider sm:text-[#edecec]">
+            Privacy
+          </h2>
+        </BlurFade>
         <BlurFade delay={0.5}>
+          <p className="text-gray-500 sm:text-[#edecec]/60">
+            Your bookmarks live entirely in your browser. Nothing is stored on our servers, exported, or shared. Complete privacy, complete control.
+          </p>
+        </BlurFade>
+        <BlurFade delay={0.55}>
           <div className="flex items-center gap-3 mt-8">
             <button
               onClick={onAddClick}

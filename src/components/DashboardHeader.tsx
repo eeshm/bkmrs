@@ -42,7 +42,7 @@ export function DashboardHeader({
             <StashLogo className=" size-10 sm:size-12" />
           </div>
  
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center h-full ">
             {/* Top row: All action buttons in one line */}
             <div className="flex flex-row items-center gap-2  h-9 rounded-md">
               {bookmarksCount > 0 && (
@@ -54,7 +54,7 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative  flex items-center overflow-hidden rounded-md sm:shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
+                        className="flex items-center overflow-hidden rounded-md sm:shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
                       >
                         <Input
                           type="text"
@@ -90,7 +90,7 @@ export function DashboardHeader({
                   onClick={onImportClick}
                   size="sm"
                   variant="ghost"
-                  className="px-2  rounded-lg text-sm font-medium text-gray-900  hover:bg-transparent hover:opacity-70 transition-all duration-300 underline underline-offset-4 cursor-pointer"
+                  className="px-0 pb-1 rounded-lg text-sm font-medium text-gray-900  hover:bg-transparent hover:opacity-70 transition-all duration-300 underline underline-offset-4 cursor-pointer"
                 >
                   Import
                 </Button>

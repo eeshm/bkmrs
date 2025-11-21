@@ -17,7 +17,7 @@ export function KeyboardShortcuts() {
     <div className="relative z-50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex items-center justify-center p-1  transition-colors hover:bg-gray-100 dark:hover:bg-white/10 rounded-md"
+        className="cursor-pointer flex items-center justify-center transition-colors hover:bg-gray-100 dark:hover:bg-white/10 rounded-md"
         title="Keyboard Shortcuts"
       >
         <Keyboard className="size-5 sm:size-4 stroke-gray-600 dark:stroke-gray-400" />
