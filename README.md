@@ -30,7 +30,7 @@ A minimal, keyboard-first bookmark manager that keeps your links private and org
 ### Installation
 ```bash
 git clone <repo>
-cd bkmrs
+cd stsh
 bun install
 ```
 
