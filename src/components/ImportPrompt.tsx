@@ -56,7 +56,7 @@ export function ImportPrompt({ onImportComplete, onBack, onSkip }: ImportPromptP
       <div className="mx-auto px-4 py-1 sm:border-0 border-b border-gray-200 border-dashed sm:h-full h-14 ">
         <div className="flex items-center pt-1  justify-between h-full">
           <div className="flex">
-              <StashLogo className="size-12" />
+              <StashLogo className="size-10 sm:size-12" />
             </div>
             <button
               onClick={onBack}

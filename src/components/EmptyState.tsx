@@ -7,7 +7,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ onAddClick, onImportClick }: EmptyStateProps) {
   return (
-    <div className="flex justify-center items-center pt:10 sm:pt-20">
+    <div className="flex justify-center items-center pt-10 sm:pt-20">
       <div className="p-2 sm:p-3 max-w-lg mx-auto text-[15px] text-left font-sans leading-relaxed space-y-2">
         <BlurFade delay={0.2}>
           <h2 className="font-medium  sm:text-[#edecec] tracking-tight">

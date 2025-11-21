@@ -39,7 +39,7 @@ export function DashboardHeader({
       <div className="mx-auto px-4 py-1 sm:border-0 border-b border-gray-200 border-dashed sm:h-full h-14 ">
         <div className="flex items-center pt-1  justify-between h-full">
           <div className="flex">
-            <StashLogo className="size-12" />
+            <StashLogo className=" size-10 sm:size-12" />
           </div>
  
           <div className="flex items-center justify-center h-full">
@@ -54,7 +54,7 @@ export function DashboardHeader({
                         animate={{ opacity: 1, width: 'auto' }}
                         exit={{ opacity: 0, width: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative h-full flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
+                        className="relative  flex items-center overflow-hidden rounded-md shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
                       >
                         <Input
                           type="text"
@@ -62,7 +62,7 @@ export function DashboardHeader({
                           value={searchQuery}
                           onChange={(e) => onSearchChange(e.target.value)}
                           autoFocus
-                          className="flex-1 rounded-lg  placeholder:text-gray-500 text-base border-gray-200 focus:ring-0 focus:ring-gray-400"
+                          className="flex-1 rounded-lg h-7 sm:h-full sm:w-full w-28 placeholder:text-gray-500 text-base border-gray-200 focus:ring-0 focus:ring-gray-400"
                         />
                         {searchQuery && (
                           <button
@@ -80,7 +80,7 @@ export function DashboardHeader({
                     onClick={() => onSearchOpenChange(!isSearchOpen)}
                     className="cursor-pointer flex items-center justify-center p-1"
                   >
-                    <Search className="size-4 stroke-gray-600" />
+                    <Search className="size-3 sm:size-4 stroke-gray-600" />
                   </button>
                 </div>
               )}
@@ -107,7 +107,7 @@ export function DashboardHeader({
                         }`}
                         title="Edit Mode (E)"
                   >
-                    <EditIcon className="size-4" />
+                    <EditIcon className="size-3 sm:size-4" />
                   </button>
                   <button
                     onClick={() => onEditModeChange?.(editMode === 'delete' ? null : 'delete')}
@@ -120,7 +120,7 @@ export function DashboardHeader({
                     title="Delete Mode (D)"
                   >
                     <TrashIcon123
-                      className="size-4"
+                      className="size-3 sm:size-4"
                       fill={editMode === 'delete' ? 'white' : 'var(--color-red-600)'}
                       secondaryfill={editMode === 'delete' ? 'var(--color-gray-200)' : 'var(--color-red-700)'}
                     />
@@ -133,7 +133,7 @@ export function DashboardHeader({
                 className="cursor-pointer flex items-center justify-center transition-colors p-1"
                 title="Add New (A)"
               >
-                <PlusIcon className="size-4 " />
+                <PlusIcon className="size-3 sm:size-4" />
               </button>
 
               <div className="hidden sm:block">
